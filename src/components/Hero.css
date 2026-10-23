@@ -1,0 +1,127 @@
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(1.75rem, 5vh, 3.5rem) var(--page-pad) var(--space-lg);
+}
+
+.hero__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: clamp(1.5rem, 4vh, 3rem);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero__index {
+  color: var(--accent);
+}
+
+.hero__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3.4rem, 16vw, 11.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.hero__title-line {
+  display: block;
+}
+
+.hero__title-line--offset {
+  padding-left: clamp(0rem, 8vw, 7rem);
+}
+
+.hero__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 28rem);
+  gap: var(--space-xl) clamp(2rem, 6vw, 5rem);
+  align-items: end;
+  margin-top: clamp(1.75rem, 5vh, 3.25rem);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.hero__role {
+  max-width: 22rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.hero__copy {
+  font-size: clamp(0.98rem, 1.35vw, 1.125rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.hero__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: auto;
+  padding-top: clamp(2.5rem, 8vh, 5rem);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.hero__scroll-mark {
+  width: 1.35rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .hero__title-line--offset {
+    padding-left: 0;
+  }
+
+  .hero__body {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 1.5rem;
+  }
+
+  .hero__title {
+    font-size: clamp(3.1rem, 18vw, 4.75rem);
+  }
+
+  .hero__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: var(--space-xl);
+  }
+}

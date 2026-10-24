@@ -45,11 +45,21 @@ function ProjectCard({ project }: ProjectCardProps) {
           </a>
         ) : null}
         {project.detailsHref ? (
-          <a className="project-card__link" href={project.detailsHref}>
-            View details
+          <a
+            className="project-card__link project-card__link--case-study"
+            href={project.detailsHref}
+            aria-label={`View Case Study: ${project.name}`}
+          >
+            View Case Study
           </a>
         ) : (
-          <span className="project-card__pending">Details forthcoming</span>
+          <a
+            className="project-card__link project-card__link--case-study"
+            href={`#/project/${project.id}`}
+            aria-label={`View Case Study: ${project.name}`}
+          >
+            View Case Study
+          </a>
         )}
       </div>
     </article>

@@ -91,6 +91,15 @@
   color: var(--accent);
 }
 
+.project-card__link--case-study {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.project-card__link--case-study::after {
+  content: ' →';
+}
+
 .project-card__pending {
   font-size: 0.78rem;
   letter-spacing: 0.12em;

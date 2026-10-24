@@ -18,6 +18,7 @@ export const projects: Project[] = [
       'A collection of Python programming exercises, including factorial, Fibonacci and struct-to-dictionary conversion, with supporting documentation.',
     technologies: ['Python', 'Jupyter Notebook'],
     repositoryUrl: 'https://github.com/TusharMital/python-programs-collection',
+    detailsHref: '#/project/python-programs-collection',
   },
   {
     id: 'python-debugging',
@@ -27,6 +28,7 @@ export const projects: Project[] = [
       'Coursework on inspecting, debugging and improving Python utilities. The repository uses unittest and a red–fix–green workflow to correct average, pass-mark and grade logic.',
     technologies: ['Python', 'unittest'],
     repositoryUrl: 'https://github.com/TusharMital/lecture-8-python-debugging',
+    detailsHref: '#/project/python-debugging',
   },
   {
     id: 'cursor-bug-fix',
@@ -35,6 +37,7 @@ export const projects: Project[] = [
     description:
       'A debugging case study of a Python loop that overwrote a running total instead of accumulating values. The correction uses total += numbers[i], producing the expected sum of 150 for the supplied example.',
     technologies: ['Python'],
+    detailsHref: '#/project/cursor-bug-fix',
   },
   {
     id: 'interactive-quiz',
@@ -45,6 +48,7 @@ export const projects: Project[] = [
     technologies: ['HTML', 'CSS', 'JavaScript'],
     repositoryUrl: 'https://github.com/TusharMital/interactive-quiz-app',
     liveUrl: 'https://interactive-quiz-app-rosy.vercel.app/',
+    detailsHref: '#/project/interactive-quiz',
   },
   {
     id: 'reading-list',
@@ -55,5 +59,6 @@ export const projects: Project[] = [
     technologies: ['React', 'TypeScript', 'Vite'],
     repositoryUrl: 'https://github.com/TusharMital/reading-list-app',
     liveUrl: 'https://reading-list-app-one.vercel.app/',
+    detailsHref: '#/project/reading-list',
   },
 ]

@@ -15,6 +15,20 @@
       rel="stylesheet"
     />
     <title>Tushar Mittal</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme_preference');
+          if (saved === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

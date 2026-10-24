@@ -6,6 +6,9 @@
   border-bottom: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(12px);
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
 }
 
 .nav.is-open {
@@ -44,6 +47,49 @@
   color: var(--text-muted);
 }
 
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+/* Theme Toggle Button */
+.nav__theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition:
+    border-color var(--duration) var(--ease),
+    background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.nav__theme-btn:hover,
+.nav__theme-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav__theme-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke: currentColor;
+}
+
+.nav__theme-text {
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* Nav Links */
 .nav__links {
   display: flex;
   align-items: center;
@@ -93,6 +139,7 @@
   border: 1px solid var(--border);
   align-items: center;
   justify-content: center;
+  background: var(--bg-raised);
   transition: border-color var(--duration) var(--ease);
 }
 
@@ -146,6 +193,14 @@
 @media (max-width: 900px) {
   .nav__name {
     display: none;
+  }
+
+  .nav__theme-text {
+    display: none;
+  }
+
+  .nav__theme-btn {
+    padding: 0.5rem 0.55rem;
   }
 
   .nav__toggle {

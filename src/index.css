@@ -48,6 +48,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
 }
 
 body {
@@ -96,7 +97,9 @@ button {
 
 h1,
 h2,
-p {
+h3,
+p,
+blockquote {
   margin: 0;
 }
 

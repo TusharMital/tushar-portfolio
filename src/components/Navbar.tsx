@@ -16,7 +16,7 @@ const NAV_ITEMS = [
 
 type NavbarProps = {
   isCaseStudy?: boolean
-  onNavigateHome?: () => void
+  onNavigateHome?: (targetSectionId?: string) => void
   onOpenAssistantModal?: () => void
 }
 
@@ -42,6 +42,17 @@ function Navbar({
     return () => {
       document.body.style.overflow = ''
     }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [open])
 
   useEffect(() => {
@@ -75,11 +86,7 @@ function Navbar({
   const handleLinkClick = (id: string) => {
     setOpen(false)
     if (isCaseStudy && onNavigateHome) {
-      onNavigateHome()
-      setTimeout(() => {
-        const el = document.getElementById(id)
-        el?.scrollIntoView({ behavior: 'smooth' })
-      }, 50)
+      onNavigateHome(id)
     }
   }
 
@@ -103,7 +110,7 @@ function Navbar({
           onClick={(e) => {
             if (isCaseStudy && onNavigateHome) {
               e.preventDefault()
-              onNavigateHome()
+              onNavigateHome('top')
             }
             setOpen(false)
           }}
@@ -185,7 +192,15 @@ function Navbar({
 
       {/* Mobile Drawer / Overlay Navigation */}
       {open && (
-        <div className="site-nav__mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+        <div
+          className="site-nav__mobile-drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation Menu"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setOpen(false)
+          }}
+        >
           <div className="site-nav__mobile-content">
             <div className="site-nav__mobile-header">
               <span className="display site-nav__mobile-title">Tushar Mittal</span>

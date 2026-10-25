@@ -110,8 +110,9 @@
 .site-nav__btn {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0.25rem;
   border-radius: var(--radius);
   background: transparent;
   color: var(--muted-foreground);

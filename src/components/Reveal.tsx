@@ -5,19 +5,25 @@ import {
   type ElementType,
   type ReactNode,
   type CSSProperties,
+  type ComponentPropsWithoutRef,
 } from 'react'
 
-export function Reveal({
-  as: Tag = 'div',
-  delay = 0,
-  className = '',
-  children,
-}: {
-  as?: ElementType
+type RevealProps<T extends ElementType = 'div'> = {
+  as?: T
   delay?: number
   className?: string
   children: ReactNode
-}) {
+} & Omit<ComponentPropsWithoutRef<T>, 'as' | 'children' | 'className'>
+
+export function Reveal<T extends ElementType = 'div'>({
+  as,
+  delay = 0,
+  className = '',
+  children,
+  style,
+  ...rest
+}: RevealProps<T>) {
+  const Tag = as || 'div'
   const ref = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -39,10 +45,11 @@ export function Reveal({
 
   return (
     <Tag
-      ref={ref}
+      ref={ref as any}
       data-visible={visible}
       className={`reveal ${className}`}
-      style={{ '--d': `${delay}ms` } as CSSProperties}
+      style={{ '--d': `${delay}ms`, ...(style as CSSProperties) } as CSSProperties}
+      {...rest}
     >
       {children}
     </Tag>

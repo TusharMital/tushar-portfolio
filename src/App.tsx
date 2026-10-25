@@ -16,16 +16,16 @@ function App() {
   const { route, projectId, navigateTo } = useHashRoute()
   const [chatOpen, setChatOpen] = useState(false)
 
-  const handleReturnToProjects = () => {
-    navigateTo('#projects')
+  const handleNavigateFromCaseStudy = (targetId: string = 'projects') => {
+    navigateTo(`#${targetId}`)
     setTimeout(() => {
-      const section = document.getElementById('projects')
+      const section = document.getElementById(targetId)
       section?.scrollIntoView({ behavior: 'smooth' })
     }, 50)
   }
 
   return (
-    <div className="page" id="top">
+    <div className="page">
       {route === 'case-study' && projectId ? (
         <>
           <a className="skip-link" href="#case-study-heading">
@@ -33,13 +33,13 @@ function App() {
           </a>
           <Navbar
             isCaseStudy={true}
-            onNavigateHome={handleReturnToProjects}
+            onNavigateHome={handleNavigateFromCaseStudy}
             onOpenAssistantModal={() => setChatOpen(true)}
           />
           <main id="main" className="page__main">
             <CaseStudyView
               projectId={projectId}
-              onBack={handleReturnToProjects}
+              onBack={() => handleNavigateFromCaseStudy('projects')}
             />
           </main>
           <Chatbot

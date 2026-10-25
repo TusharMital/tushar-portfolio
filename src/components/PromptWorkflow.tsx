@@ -87,7 +87,7 @@ function PromptWorkflow() {
         </Reveal>
 
         <div className="workflow-section__header">
-          <Reveal as="h2" className="display workflow-section__title">
+          <Reveal as="h2" id="workflow-heading" className="display workflow-section__title">
             From prompt to{' '}
             <em className="workflow-section__highlight">working</em> software.
           </Reveal>

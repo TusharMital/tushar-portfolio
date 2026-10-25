@@ -10,7 +10,7 @@ function Skills() {
           <SectionLabel n="02">Skills &amp; current learning</SectionLabel>
         </Reveal>
 
-        <Reveal as="h2" className="display skills-section__title">
+        <Reveal as="h2" id="skills-heading" className="display skills-section__title">
           What I work with{' '}
           <span className="skills-section__title-muted">
             — and keep learning.

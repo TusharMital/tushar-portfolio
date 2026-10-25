@@ -2,7 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Migration: GroqCloud API Integration] - 2026-10-24
+## [Stage 7: Portfolio Quality Assurance & Final Polish] - 2026-10-26
+
+### Fixed
+- **Resolved HTML ID Uniqueness Violation**: Removed duplicate `id="top"` on outer `<div className="page">` in `App.tsx`, preserving single source of truth on `<section id="top">` in `Hero.tsx`.
+- **Restored Broken `aria-labelledby` References**:
+  - Updated `Reveal.tsx` component to forward HTML attributes (`id`, `aria-label`, etc.) and merge `style` with polymorphic elements.
+  - Added matching `id` attributes to section headings: `id="about-heading"` (`About.tsx`), `id="skills-heading"` (`Skills.tsx`), `id="projects-heading"` (`Projects.tsx`), `id="workflow-heading"` (`PromptWorkflow.tsx`), `id="journey-heading"` (`LearningJourney.tsx`), `id="assistant-heading"` (`Chatbot.tsx`), and `id="contact-heading"` (`Contact.tsx`).
+- **Fixed Case-Study Navbar Navigation**:
+  - Updated `Navbar.tsx` and `App.tsx` so clicking any section link in the navbar while viewing a case study correctly navigates to the target section (`#about`, `#skills`, `#contact`, etc.) instead of defaulting always to `#projects`.
+  - Brand logo now navigates cleanly back to top (`#top`).
+
+### Added & Improved
+- **Modal & Drawer Keyboard Accessibility (WCAG 2.1)**:
+  - Added `Escape` key event listener to both the mobile navigation drawer (`Navbar.tsx`) and the floating assistant drawer (`Chatbot.tsx`).
+  - Added backdrop overlay click dismissal to the mobile navigation drawer.
+  - Added `aria-modal="true"` to the floating assistant dialog container.
+- **Input Character Constraint Synchronization**:
+  - Synchronized in-page chat input and drawer chat textarea to `maxLength={600}` to prevent silent server truncation or rejection by backend `api/chat.ts`.
+- **Responsive Ergonomics & Touch Target Sizing**:
+  - Increased navbar button touch target dimensions to `min-width: 2.5rem; min-height: 2.5rem;` (40px+) in `Navbar.css`.
+  - Added `overflow-x: hidden;` to `html` and `body` in `index.css` to prevent accidental horizontal scrollbar on narrow mobile devices.
+
+### Verified
+- Automated lint (`oxlint`): 0 warnings, 0 errors across 25 files.
+- TypeScript compiler (`tsc -b`): Clean execution with 0 errors.
+- Production build (`npm run build`): Completed in 5.21s with all assets bundled and minified.
+- Live GroqCloud AI Chatbot endpoint: Verified with real HTTP requests returning 200 OK and grounded answers.
+
+
 
 ### Changed
 - **Migrated Portfolio AI Assistant from Google Gemini to GroqCloud**:

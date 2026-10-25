@@ -68,7 +68,7 @@ function Projects() {
 
         {/* Section Header with Search & Filter */}
         <div className="projects-section__header">
-          <Reveal as="h2" className="display projects-section__title">
+          <Reveal as="h2" id="projects-heading" className="display projects-section__title">
             Projects<span className="projects-section__title-dot">.</span>
           </Reveal>
 

@@ -63,7 +63,7 @@ function LearningJourney() {
               <Reveal>
                 <SectionLabel n="05">Learning Journey</SectionLabel>
               </Reveal>
-              <Reveal as="h2" className="display journey-section__title">
+              <Reveal as="h2" id="journey-heading" className="display journey-section__title">
                 Building the foundations.
               </Reveal>
               <Reveal delay={100} className="journey-section__desc">

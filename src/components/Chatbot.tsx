@@ -75,6 +75,17 @@ function Chatbot({ isOpenFloating, onToggleFloating }: ChatbotProps) {
     }
   }, [isDrawerOpen])
 
+  useEffect(() => {
+    if (!isDrawerOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDrawerOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isDrawerOpen, setDrawerOpen])
+
   const sendMessage = async (textToSend: string) => {
     const trimmed = textToSend.trim()
     if (!trimmed || isLoading) return
@@ -191,7 +202,7 @@ function Chatbot({ isOpenFloating, onToggleFloating }: ChatbotProps) {
             <SectionLabel n="06">AI Assistant</SectionLabel>
           </Reveal>
 
-          <Reveal as="h2" className="display chat-section__title">
+          <Reveal as="h2" id="assistant-heading" className="display chat-section__title">
             Ask my portfolio<span className="chat-section__title-dot">.</span>
           </Reveal>
 
@@ -317,7 +328,7 @@ function Chatbot({ isOpenFloating, onToggleFloating }: ChatbotProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isLoading}
-                maxLength={500}
+                maxLength={600}
                 autoComplete="off"
               />
               <button
@@ -360,6 +371,7 @@ function Chatbot({ isOpenFloating, onToggleFloating }: ChatbotProps) {
       {isDrawerOpen && (
         <div
           role="dialog"
+          aria-modal="true"
           aria-label="Ask Tushar’s Portfolio"
           className="chat-drawer fade-in"
         >
@@ -468,7 +480,7 @@ function Chatbot({ isOpenFloating, onToggleFloating }: ChatbotProps) {
               ref={drawerInputRef}
               rows={1}
               value={input}
-              maxLength={2000}
+              maxLength={600}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {

@@ -26,7 +26,7 @@ function About() {
         </Reveal>
 
         <div className="about-section__header-grid">
-          <Reveal as="h2" className="display about-section__title">
+          <Reveal as="h2" id="about-heading" className="display about-section__title">
             Second-year CS student at{' '}
             <em className="about-section__highlight">JECRC University</em>,
             curious about what happens{' '}

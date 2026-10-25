@@ -36,7 +36,7 @@ function Contact() {
           <SectionLabel n="07">Contact</SectionLabel>
         </Reveal>
 
-        <Reveal as="h2" className="display contact-section__title">
+        <Reveal as="h2" id="contact-heading" className="display contact-section__title">
           Curious about what
           <br />
           we can <em className="contact-section__highlight">build?</em>

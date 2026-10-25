@@ -2,6 +2,85 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Migration: GroqCloud API Integration] - 2026-10-24
+
+### Changed
+- **Migrated Portfolio AI Assistant from Google Gemini to GroqCloud**:
+  - Replaced Google Gemini API (`@google/genai`) with GroqCloud Chat Completions API (`https://api.groq.com/openai/v1/chat/completions`).
+  - Selected official Groq active model `openai/gpt-oss-120b` as the default model (with `openai/gpt-oss-20b` as an ultra-fast alternative), configurable via `GROQ_MODEL`.
+  - Re-implemented `api/chat.ts` using native server-side `fetch` with `AbortController` (15-second timeout) and compliant OpenAI format (`system`, `user`, `assistant`).
+  - Mapped upstream HTTP errors securely: 401/403 to 502 (authentication failure), 429 to 429 (rate limit), 400 to 400 (bad format), and timeouts to 504.
+  - Updated environment variables from `GEMINI_API_KEY` to `GROQ_API_KEY` across Vite dev middleware (`vite.config.ts`), `.env.example`, `openapi.yaml`, and `README.md`.
+  - Updated `src/components/Chatbot.tsx` UI labels, intro text, disclaimers, and missing API key hints to reflect GroqCloud.
+  - Removed `@google/genai` dependency from project.
+
+### Preserved
+- All 5 verified portfolio projects and their exact GitHub/live demo URLs.
+- All 9 sections of case study data and hash routing (`#/project/:id`).
+- Real-time search, category and technology filtering, and empty state reset.
+- Chatbot UI component layout, streaming/thinking indicators, error banners, retry flow, and reset buttons.
+- Strict portfolio facts system prompt grounding responses solely in verified achievements.
+- Theme switching and persistent storage in localStorage.
+- Contact information and social links.
+
+## [Visual Redesign: Lovable Reference Fidelity] - 2026-10-24
+
+### Changed
+- **Comprehensive Visual Redesign matching Lovable Reference**:
+  - Replaced typography with Google Fonts `Instrument Serif` (display headings), `Manrope` (body sans), and `JetBrains Mono` (labels/code/chips).
+  - Adopted Lovable oklch color palette with deep charcoal background (`oklch(0.155 0.006 260)`), warm parchment text (`oklch(0.955 0.012 85)`), amber/gold primary accent (`oklch(0.76 0.095 75)`), mint signal indicator (`oklch(0.76 0.08 155)`), subtle hairline/border dividers, and cohesive light mode tokens.
+  - Implemented subtle film grain noise overlay (`.grain`) and decorative coordinate grid lines (`.grid-lines`).
+  - Added interactive `ParticleField` canvas in Hero with cursor repulsion and wave physics respecting `prefers-reduced-motion`.
+  - Rebuilt `Hero` with status indicator (`Building · Learning · Experimenting`), gigantic staggered display heading (`Tushar Mittal`), 3-column metadata, pill action buttons, and animated scroll indicator.
+  - Rebuilt `About` with huge display heading, dual bordered cards (`// fundamentals` and `// coursework`), and verified learning callout.
+  - Rebuilt `Skills` with horizontal divider rows, mono primary group titles, and display font items with italic hover transitions.
+  - Rebuilt `Projects` showcase with real-time search, category filter chips, count status, and alternating 2-column cards featuring custom `ProjectVisual` abstract illustrations (Fibonacci bars, Quiz mockup, RED/GREEN debugging, Book list shelf).
+  - Rebuilt `PromptWorkflow` with scroll-linked progress timeline connecting the 5 stages (`01 UNDERSTAND`, `02 DEFINE`, `03 PROMPT`, `04 INSPECT & TEST`, `05 REFINE & DOCUMENT`) with glowing indicator nodes.
+  - Added `LearningJourney` (Milestones section) with sticky sidebar and Education/Certification summary for MeitY Quantum Computing course.
+  - Rebuilt `Chatbot` supporting both in-page grounded assistant section and bottom-right floating button/drawer with Gemini integration.
+  - Rebuilt `Contact` with email copy button, social links with hover arrows, and Lovable footer (`compiled with curiosity · JECRC University`).
+  - Rebuilt `CaseStudyView` with matching typography, pill buttons, and styled code decision blocks.
+  - Rebuilt `Navbar` with TM. display logo, desktop link indicator, mobile drawer overlay, theme switcher, and Ask button.
+
+### Preserved
+- All 5 verified portfolio projects and their exact GitHub/live demo URLs.
+- All 9 sections of case study data and direct hash routing (`#/project/:id`).
+- Real-time search, category and technology filtering, and empty state reset.
+- Google Gemini `/api/chat` server-side integration and API key security.
+- Theme switching and persistent storage in localStorage.
+- Contact information (email, GitHub, LinkedIn).
+
+### Changed
+- **Migrated Portfolio AI Assistant to Google Gemini**:
+  - Replaced Groq API (`llama-3.3-70b-versatile`) with Google's official Gemini API powered by `@google/genai` (`gemini-2.5-flash`).
+  - Adapted `/api/chat.ts` to utilize the official `@google/genai` SDK with native timeout handling (15 seconds) and safe HTTP error mapping (400, 401/403 -> 502, 429, 502, 504).
+  - Maintained strict portfolio-grounded system instructions passed through `config.systemInstruction` rather than unsupported conversation turns.
+  - Implemented compliant conversation history translation ensuring `user` / `model` roles, stripping initial assistant greetings so conversations always start with a `user` turn, merging consecutive identical roles, and validating that the sequence ends on a `user` message.
+  - Migrated environment configuration to `GEMINI_API_KEY` (with optional `GEMINI_MODEL` override) in `vite.config.ts`, `.env.example`, and deployment guides.
+  - Updated `src/components/Chatbot.tsx` UI labels, ledes, disclaimers, and missing-key configuration instructions to reflect Google Gemini.
+  - Updated `openapi.yaml` endpoint documentation to reflect the Gemini API integration and response codes.
+
+## [Stage 6: AI Chatbot & Contact Section] - 2026-10-24
+
+### Added
+- **AI Portfolio Chatbot**:
+  - Implemented `/api/chat.ts` server-side function to interface securely with the Groq API (`llama-3.3-70b-versatile`).
+  - Added strict, verified system instructions grounding answers in Tushar's real background, 5 projects, learning topics, and coursework while refusing speculative claims.
+  - Implemented secure key isolation: `GROQ_API_KEY` is kept strictly on the server and never exposed to the client or client-side bundles.
+  - Integrated local Vite middleware in `vite.config.ts` allowing `/api/chat` to execute locally during `npm run dev`.
+  - Created `src/components/Chatbot.tsx` and `src/components/Chatbot.css` featuring message history, prompt suggestion chips, loading states, retry options for failures, and clear-chat capability.
+  - Handled missing configuration, rate limits (HTTP 429), timeouts (15s), and invalid requests gracefully with user-friendly messages.
+- **Dedicated Contact Section**:
+  - Created `src/components/Contact.tsx` and `src/components/Contact.css` as Section 07 (`#contact`).
+  - Provided direct, honest contact channels: verified email (`tushar.mitt6@gmail.com`) with `mailto:` composition and clipboard copy, GitHub profile link (`@TusharMital`), and LinkedIn profile link.
+  - Avoided deceptive forms that simulate message sending without a backend mail delivery system.
+- **Routing & Environment Configuration**:
+  - Updated `vercel.json` rewrite rule to exclude `/api/*` routes from single-page application fallback.
+  - Updated `.gitignore` to explicitly exclude all local `.env` and `.env.*` files.
+  - Created `.env.example` with safe placeholder configuration.
+  - Created `openapi.yaml` documenting the `/api/chat` specification.
+  - Updated primary navigation in `Navbar.tsx` with links to `#assistant` and `#contact`.
+
 ## [Stage 5 Enhancement] - 2026-10-24
 
 ### Added

@@ -1,52 +1,72 @@
-.skills__intro {
-  max-width: 36rem;
-  margin: 0 0 clamp(2rem, 4vh, 2.75rem);
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--text-muted);
+.skills-section {
+  position: relative;
+  border-top: 1px solid var(--hairline);
+  padding: clamp(5rem, 12vh, 9rem) 0;
 }
 
-.skills__grid {
+.skills-section__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.skills-section__title {
+  margin-top: 2rem;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 1.05;
+  color: var(--foreground);
+}
+
+.skills-section__title-muted {
+  color: var(--muted-foreground);
+}
+
+.skills-section__grid {
+  margin-top: clamp(3rem, 6vh, 4.5rem);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.skills-section__row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-  border-top: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+  gap: 1.5rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
-.skills__group {
-  padding: clamp(1.35rem, 3vw, 2rem);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+.skills-section__row:last-child {
+  border-bottom: none;
 }
 
-.skills__group-title {
-  margin: 0 0 1rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.skills__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.skills__list li {
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.5;
-  color: var(--text);
-}
-
-@media (max-width: 800px) {
-  .skills__grid {
-    grid-template-columns: 1fr;
+@media (min-width: 900px) {
+  .skills-section__row {
+    grid-template-columns: 3.5fr 8.5fr;
+    gap: 3rem;
   }
+}
+
+.skills-section__group-title {
+  color: var(--primary);
+  padding-top: 0.5rem;
+}
+
+.skills-section__items {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 0.65rem;
+}
+
+.skills-section__item {
+  font-size: clamp(1.75rem, 3.2vw, 3rem);
+  color: color-mix(in oklch, var(--foreground) 65%, transparent);
+  cursor: default;
+  transition: all 0.3s ease;
+  white-space: normal;
+}
+
+.skills-section__item:hover {
+  color: var(--foreground);
+  font-style: italic;
+  transform: translateX(4px);
 }

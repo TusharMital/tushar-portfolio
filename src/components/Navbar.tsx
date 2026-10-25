@@ -1,28 +1,40 @@
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Menu, X, Moon, Sun, MessageSquare } from 'lucide-react'
 import { applyTheme, getInitialTheme, type Theme } from '../utils/theme'
 import './Navbar.css'
 
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#workflow', label: 'Workflow' },
+const NAV_ITEMS = [
+  { id: 'top', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'journey', label: 'Learning Journey' },
+  { id: 'workflow', label: 'Prompt Engineering' },
+  { id: 'assistant', label: 'AI Assistant' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 type NavbarProps = {
   isCaseStudy?: boolean
   onNavigateHome?: () => void
+  onOpenAssistantModal?: () => void
 }
 
-function Navbar({ isCaseStudy = false, onNavigateHome }: NavbarProps) {
+function Navbar({
+  isCaseStudy = false,
+  onNavigateHome,
+  onOpenAssistantModal,
+}: NavbarProps) {
+  const [active, setActive] = useState('top')
   const [open, setOpen] = useState(false)
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
-  const menuId = useId()
 
   useEffect(() => {
-    const close = () => setOpen(false)
-    window.addEventListener('resize', close)
-    return () => window.removeEventListener('resize', close)
+    const handleResize = () => {
+      if (window.innerWidth >= 1200) setOpen(false)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
@@ -32,30 +44,62 @@ function Navbar({ isCaseStudy = false, onNavigateHome }: NavbarProps) {
     }
   }, [open])
 
-  const handleToggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark'
+  useEffect(() => {
+    if (isCaseStudy) return
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    )
+
+    NAV_ITEMS.forEach((item) => {
+      const el = document.getElementById(item.id)
+      if (el) io.observe(el)
+    })
+
+    return () => io.disconnect()
+  }, [isCaseStudy])
+
+  const toggleTheme = () => {
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark'
     setTheme(nextTheme)
     applyTheme(nextTheme)
   }
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (id: string) => {
     setOpen(false)
     if (isCaseStudy && onNavigateHome) {
       onNavigateHome()
-      // Let home render, then scroll to section
       setTimeout(() => {
-        const target = document.querySelector(href)
-        target?.scrollIntoView({ behavior: 'smooth' })
+        const el = document.getElementById(id)
+        el?.scrollIntoView({ behavior: 'smooth' })
       }, 50)
     }
   }
 
+  const handleAskClick = () => {
+    if (onOpenAssistantModal) {
+      onOpenAssistantModal()
+    } else {
+      handleLinkClick('assistant')
+      const el = document.getElementById('assistant')
+      el?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <header className={open ? 'nav is-open' : 'nav'}>
-      <div className="nav__inner">
+    <header className="site-nav">
+      <div className="site-nav__inner">
+        {/* Brand Logo */}
         <a
-          className="nav__mark"
           href={isCaseStudy ? '#/' : '#top'}
+          className="site-nav__brand display"
           onClick={(e) => {
             if (isCaseStudy && onNavigateHome) {
               e.preventDefault()
@@ -63,99 +107,113 @@ function Navbar({ isCaseStudy = false, onNavigateHome }: NavbarProps) {
             }
             setOpen(false)
           }}
+          aria-label="Tushar Mittal Portfolio Home"
         >
-          <span className="nav__initials">TM</span>
-          <span className="nav__name">Tushar Mittal</span>
+          TM<span className="site-nav__dot">.</span>
         </a>
 
-        <div className="nav__actions">
+        {/* Desktop Navigation Links */}
+        <nav className="site-nav__desktop" aria-label="Main">
+          <ul className="site-nav__links">
+            {NAV_ITEMS.map((item) => {
+              const isActive = active === item.id && !isCaseStudy
+              const href = isCaseStudy ? `#/${item.id}` : `#${item.id}`
+              return (
+                <li key={item.id}>
+                  <a
+                    href={href}
+                    className={`site-nav__link ${isActive ? 'is-active' : ''}`}
+                    onClick={() => handleLinkClick(item.id)}
+                    aria-current={isActive ? 'location' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+
+        {/* Action Controls */}
+        <div className="site-nav__actions">
+          {/* Ask Button */}
+          <button
+            type="button"
+            className="site-nav__ask-btn label-mono"
+            onClick={handleAskClick}
+            aria-label="Ask portfolio assistant"
+          >
+            <MessageSquare className="site-nav__icon" aria-hidden="true" />
+            <span>Ask</span>
+          </button>
+
           {/* Theme Toggle Button */}
           <button
             type="button"
-            className="nav__theme-btn"
-            onClick={handleToggleTheme}
+            className="site-nav__btn site-nav__btn--theme"
+            onClick={toggleTheme}
             aria-label={
-              theme === 'dark'
-                ? 'Switch to light theme'
-                : 'Switch to dark theme'
+              theme === 'light'
+                ? 'Switch to dark theme'
+                : 'Switch to light theme'
             }
-            title={
-              theme === 'dark'
-                ? 'Switch to light theme'
-                : 'Switch to dark theme'
-            }
-            aria-pressed={theme === 'light'}
+            title={theme === 'light' ? 'Dark theme' : 'Light theme'}
           >
-            {theme === 'dark' ? (
-              <svg
-                className="nav__theme-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
+            {theme === 'light' ? (
+              <Moon className="site-nav__icon" aria-hidden="true" />
             ) : (
-              <svg
-                className="nav__theme-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
+              <Sun className="site-nav__icon" aria-hidden="true" />
             )}
-            <span className="nav__theme-text">
-              {theme === 'dark' ? 'Light' : 'Dark'}
-            </span>
           </button>
 
           {/* Mobile Menu Toggle Button */}
           <button
-            className="nav__toggle"
             type="button"
+            className="site-nav__btn site-nav__btn--menu"
+            onClick={() => setOpen((prev) => !prev)}
             aria-expanded={open}
-            aria-controls={menuId}
-            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? 'Close menu' : 'Open navigation menu'}
           >
-            <span className="nav__toggle-bars" aria-hidden="true" />
+            {open ? (
+              <X className="site-nav__icon" aria-hidden="true" />
+            ) : (
+              <Menu className="site-nav__icon" aria-hidden="true" />
+            )}
           </button>
+        </div>
+      </div>
 
-          {/* Navigation Links */}
-          <nav aria-label="Primary">
-            <ul className="nav__links" id={menuId}>
-              {links.map((link) => (
-                <li key={link.href}>
+      {/* Mobile Drawer / Overlay Navigation */}
+      {open && (
+        <div className="site-nav__mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+          <div className="site-nav__mobile-content">
+            <div className="site-nav__mobile-header">
+              <span className="display site-nav__mobile-title">Tushar Mittal</span>
+              <button
+                type="button"
+                className="site-nav__btn"
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+              >
+                <X className="site-nav__icon" aria-hidden="true" />
+              </button>
+            </div>
+            <ul className="site-nav__mobile-links">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.id}>
                   <a
-                    className="nav__link"
-                    href={isCaseStudy ? `#/${link.href}` : link.href}
-                    onClick={() => handleLinkClick(link.href)}
+                    href={isCaseStudy ? `#/${item.id}` : `#${item.id}`}
+                    className="site-nav__mobile-link"
+                    onClick={() => handleLinkClick(item.id)}
                   >
-                    {link.label}
+                    {item.label}
                   </a>
                 </li>
               ))}
             </ul>
-          </nav>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   )
 }

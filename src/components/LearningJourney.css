@@ -1,0 +1,142 @@
+.journey-section {
+  position: relative;
+  border-top: 1px solid var(--hairline);
+  background: var(--card);
+  padding: clamp(5rem, 12vh, 9rem) 0 0;
+}
+
+.journey-section__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.journey-section__grid {
+  display: grid;
+  gap: 3.5rem;
+}
+
+@media (min-width: 900px) {
+  .journey-section__grid {
+    grid-template-columns: 4fr 8fr;
+    gap: 4.5rem;
+  }
+}
+
+.journey-section__sticky-col {
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .journey-section__sticky-content {
+    position: sticky;
+    top: calc(var(--nav-height) + 2rem);
+  }
+}
+
+.journey-section__title {
+  font-size: clamp(2.5rem, 4.5vw, 4.25rem);
+  line-height: 1.05;
+  color: var(--foreground);
+  margin-top: 1.5rem;
+}
+
+.journey-section__desc {
+  margin-top: 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+
+.journey-section__timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-section__item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  transition: all 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .journey-section__item {
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.journey-section__item-num {
+  padding-top: 0.5rem;
+  color: var(--muted-foreground);
+}
+
+.journey-section__item-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-section__item-title {
+  font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+  color: var(--foreground);
+  line-height: 1.15;
+  transition: color 0.25s ease;
+}
+
+.journey-section__item:hover .journey-section__item-title {
+  color: var(--primary);
+}
+
+.journey-section__item-desc {
+  margin-top: 0.75rem;
+  max-width: 42rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+
+/* Certification Card */
+.journey-section__cert-card {
+  margin-top: clamp(4rem, 8vh, 6rem);
+  border-top: 1px solid var(--border);
+  padding: clamp(3rem, 6vh, 4.5rem) 0 clamp(4rem, 8vh, 6rem);
+}
+
+.journey-section__cert-kicker {
+  color: var(--primary);
+}
+
+.journey-section__cert-title {
+  margin-top: 1rem;
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  color: var(--foreground);
+  line-height: 1.1;
+  max-width: 52rem;
+}
+
+.journey-section__cert-grid {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.journey-section__cert-dt {
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.journey-section__cert-dd {
+  font-size: 1.1rem;
+  color: var(--foreground);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.journey-section__cert-dd--rating {
+  color: var(--signal);
+  font-weight: 500;
+}

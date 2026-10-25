@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import About from './components/About'
 import CaseStudyView from './components/CaseStudyView'
+import Chatbot from './components/Chatbot'
+import Contact from './components/Contact'
 import Hero from './components/Hero'
+import LearningJourney from './components/LearningJourney'
 import Navbar from './components/Navbar'
 import Projects from './components/Projects'
 import PromptWorkflow from './components/PromptWorkflow'
@@ -10,10 +14,10 @@ import './App.css'
 
 function App() {
   const { route, projectId, navigateTo } = useHashRoute()
+  const [chatOpen, setChatOpen] = useState(false)
 
   const handleReturnToProjects = () => {
     navigateTo('#projects')
-    // Smoothly scroll to the projects section if needed
     setTimeout(() => {
       const section = document.getElementById('projects')
       section?.scrollIntoView({ behavior: 'smooth' })
@@ -30,6 +34,7 @@ function App() {
           <Navbar
             isCaseStudy={true}
             onNavigateHome={handleReturnToProjects}
+            onOpenAssistantModal={() => setChatOpen(true)}
           />
           <main id="main" className="page__main">
             <CaseStudyView
@@ -37,19 +42,32 @@ function App() {
               onBack={handleReturnToProjects}
             />
           </main>
+          <Chatbot
+            isOpenFloating={chatOpen}
+            onToggleFloating={setChatOpen}
+          />
         </>
       ) : (
         <>
           <a className="skip-link" href="#main">
             Skip to content
           </a>
-          <Navbar isCaseStudy={false} />
+          <Navbar
+            isCaseStudy={false}
+            onOpenAssistantModal={() => setChatOpen(true)}
+          />
           <main id="main" className="page__main">
             <Hero />
             <About />
             <Skills />
             <Projects />
             <PromptWorkflow />
+            <LearningJourney />
+            <Chatbot
+              isOpenFloating={chatOpen}
+              onToggleFloating={setChatOpen}
+            />
+            <Contact />
           </main>
         </>
       )}

@@ -1,18 +1,21 @@
 import { useMemo, useState } from 'react'
+import { Search, X } from 'lucide-react'
 import { projects } from '../data/projects'
 import ProjectCard from './ProjectCard'
-import Section from './Section'
+import { Reveal, SectionLabel } from './Reveal'
 import './Projects.css'
 
-// Extract only verified technologies from the existing source project records
-const VERIFIED_TECHNOLOGIES = [
+const CATEGORIES = [
   'All',
-  ...Array.from(new Set(projects.flatMap((p) => p.technologies))).sort(),
+  'Python',
+  'Web Development',
+  'Debugging',
+  'Prompt Engineering',
 ]
 
 function Projects() {
   const [query, setQuery] = useState('')
-  const [selectedTech, setSelectedTech] = useState('All')
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
   const filteredProjects = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -20,147 +23,157 @@ function Projects() {
       const matchesQuery =
         !q ||
         project.name.toLowerCase().includes(q) ||
-        project.description.toLowerCase().includes(q)
+        project.description.toLowerCase().includes(q) ||
+        project.technologies.some((t) => t.toLowerCase().includes(q))
 
-      const matchesTech =
-        selectedTech === 'All' || project.technologies.includes(selectedTech)
+      let matchesCategory = true
+      if (selectedCategory !== 'All') {
+        if (selectedCategory === 'Python') {
+          matchesCategory = project.technologies.includes('Python')
+        } else if (selectedCategory === 'Web Development') {
+          matchesCategory =
+            project.technologies.includes('HTML') ||
+            project.technologies.includes('JavaScript') ||
+            project.technologies.includes('React') ||
+            project.technologies.includes('CSS') ||
+            project.technologies.includes('TypeScript')
+        } else if (selectedCategory === 'Debugging') {
+          matchesCategory =
+            project.id === 'python-debugging' ||
+            project.id === 'cursor-bug-fix' ||
+            project.technologies.includes('unittest')
+        } else if (selectedCategory === 'Prompt Engineering') {
+          // All projects are part of prompt engineering and AI coursework
+          matchesCategory = true
+        }
+      }
 
-      return matchesQuery && matchesTech
+      return matchesQuery && matchesCategory
     })
-  }, [query, selectedTech])
+  }, [query, selectedCategory])
 
-  const isFiltered = query.trim().length > 0 || selectedTech !== 'All'
+  const isFiltered = query.trim().length > 0 || selectedCategory !== 'All'
 
   const handleClearFilters = () => {
     setQuery('')
-    setSelectedTech('All')
+    setSelectedCategory('All')
   }
 
   return (
-    <Section
-      id="projects"
-      index="04"
-      kicker="Work"
-      title="Selected projects"
-      headingId="projects-title"
-    >
-      <p className="section__lede">
-        Coursework, debugging studies and small applications I have built while
-        learning how software is written, tested and revised.
-      </p>
+    <section id="projects" className="projects-section" aria-labelledby="projects-heading">
+      <div className="projects-section__container">
+        <Reveal>
+          <SectionLabel n="03">Projects</SectionLabel>
+        </Reveal>
 
-      {/* Search and Technology Filters */}
-      <div className="projects__controls">
-        <div
-          role="search"
-          className="projects__search"
-          aria-label="Search projects"
-        >
-          <label htmlFor="project-search-input" className="visually-hidden">
-            Search projects by name or description
-          </label>
-          <div className="projects__search-box">
-            <span className="projects__search-icon" aria-hidden="true">
-              ⌕
-            </span>
-            <input
-              id="project-search-input"
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by project name or description…"
-              className="projects__search-input"
-              autoComplete="off"
-              spellCheck="false"
-            />
-            {query ? (
-              <button
-                type="button"
-                className="projects__search-clear"
-                onClick={() => setQuery('')}
-                aria-label="Clear search text"
-              >
-                ✕
-              </button>
-            ) : null}
-          </div>
-        </div>
+        {/* Section Header with Search & Filter */}
+        <div className="projects-section__header">
+          <Reveal as="h2" className="display projects-section__title">
+            Projects<span className="projects-section__title-dot">.</span>
+          </Reveal>
 
-        {/* Technology Filter Chips */}
-        <div
-          className="projects__filter-chips"
-          role="group"
-          aria-label="Filter projects by verified technology"
-        >
-          {VERIFIED_TECHNOLOGIES.map((tech) => {
-            const isSelected = selectedTech === tech
-            return (
-              <button
-                key={tech}
-                type="button"
-                className={
-                  isSelected
-                    ? 'projects__chip is-active'
-                    : 'projects__chip'
-                }
-                onClick={() => setSelectedTech(tech)}
-                aria-pressed={isSelected}
-              >
-                {tech}
-              </button>
-            )
-          })}
-        </div>
+          <Reveal delay={100} className="projects-section__controls">
+            {/* Search Bar */}
+            <div className="projects-section__search-box" role="search">
+              <label htmlFor="project-search-input" className="visually-hidden">
+                Search projects by name, technology or keyword
+              </label>
+              <Search className="projects-section__search-icon" aria-hidden="true" />
+              <input
+                id="project-search-input"
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search by name, tech or keyword…"
+                className="projects-section__search-input"
+                autoComplete="off"
+                spellCheck="false"
+              />
+              {query && (
+                <button
+                  type="button"
+                  className="projects-section__clear-search"
+                  onClick={() => setQuery('')}
+                  aria-label="Clear search query"
+                >
+                  <X className="projects-section__clear-icon" aria-hidden="true" />
+                </button>
+              )}
+            </div>
 
-        {/* Status and Reset */}
-        <div className="projects__status-bar" aria-live="polite">
-          <span className="projects__count">
-            Showing {filteredProjects.length} of {projects.length} projects
-            {selectedTech !== 'All' ? ` (${selectedTech})` : ''}
-          </span>
-
-          {isFiltered ? (
-            <button
-              type="button"
-              className="projects__clear-btn"
-              onClick={handleClearFilters}
-              aria-label="Clear search and technology filters"
+            {/* Category Filter Chips */}
+            <div
+              className="projects-section__chips"
+              role="group"
+              aria-label="Filter projects by category"
             >
-              Reset filters
-            </button>
-          ) : null}
+              {CATEGORIES.map((cat) => {
+                const isSelected = selectedCategory === cat
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    className={`label-mono projects-section__chip ${
+                      isSelected ? 'is-active' : ''
+                    }`}
+                    onClick={() => setSelectedCategory(cat)}
+                    aria-pressed={isSelected}
+                  >
+                    {cat}
+                  </button>
+                )
+              })}
+
+              {isFiltered && (
+                <button
+                  type="button"
+                  className="label-mono projects-section__reset-chip"
+                  onClick={handleClearFilters}
+                  aria-label="Reset all project filters"
+                >
+                  <X className="projects-section__reset-icon" aria-hidden="true" />
+                  <span>Clear</span>
+                </button>
+              )}
+            </div>
+
+            {/* Results Counter */}
+            <p className="label-mono projects-section__counter" aria-live="polite">
+              {filteredProjects.length} of {projects.length} projects
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Projects Stream */}
+        <div className="projects-section__stream">
+          {filteredProjects.length === 0 ? (
+            <div className="projects-section__empty">
+              <p className="display projects-section__empty-title">
+                Nothing matches that yet.
+              </p>
+              <p className="projects-section__empty-desc">
+                Try searching for “python”, “javascript” or “debugging”.
+              </p>
+              <button
+                type="button"
+                className="projects-section__empty-btn"
+                onClick={handleClearFilters}
+              >
+                Clear all filters
+              </button>
+            </div>
+          ) : (
+            filteredProjects.map((project, idx) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={idx}
+              />
+            ))
+          )}
         </div>
       </div>
-
-      {/* Projects Grid or Empty State */}
-      {filteredProjects.length > 0 ? (
-        <div className="projects__grid">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      ) : (
-        <div
-          className="projects__empty"
-          role="region"
-          aria-label="No projects matched search and filter criteria"
-        >
-          <p className="projects__empty-title">No matching projects found</p>
-          <p className="projects__empty-copy">
-            No projects matched your search
-            {query ? ` for "${query}"` : ''}
-            {selectedTech !== 'All' ? ` with technology "${selectedTech}"` : ''}.
-          </p>
-          <button
-            type="button"
-            className="projects__reset-btn"
-            onClick={handleClearFilters}
-          >
-            Clear all filters
-          </button>
-        </div>
-      )}
-    </Section>
+    </section>
   )
 }
 

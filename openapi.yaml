@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: Tushar Mittal Portfolio API
+  version: 1.2.0
+  description: Serverless backend endpoints supporting Tushar Mittal's Computer Science Portfolio.
+paths:
+  /api/chat:
+    post:
+      summary: Send a message to the AI Portfolio Chatbot (GroqCloud API)
+      description: |
+        Processes conversational messages grounded strictly in Tushar Mittal's verified portfolio
+        information. Calls the GroqCloud Chat Completions API (openai/gpt-oss-120b) with rate and length limits.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - messages
+              properties:
+                messages:
+                  type: array
+                  description: Array of recent conversation messages (user or assistant).
+                  items:
+                    type: object
+                    required:
+                      - role
+                      - content
+                    properties:
+                      role:
+                        type: string
+                        enum: [user, assistant]
+                      content:
+                        type: string
+                        maxLength: 600
+                        description: Message text content (trimmed and capped at 600 chars).
+      responses:
+        '200':
+          description: Successful AI response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Generated assistant response grounded in portfolio facts.
+        '400':
+          description: Bad request (invalid or empty messages array)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '405':
+          description: Method not allowed (only POST is supported)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '429':
+          description: Rate limit reached with upstream AI provider
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '502':
+          description: Upstream provider failure (Groq API authentication or service error)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '503':
+          description: Service unavailable (GROQ_API_KEY environment variable missing on server)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  code:
+                    type: string
+                    example: API_KEY_MISSING
+        '504':
+          description: Gateway timeout (request to Groq API exceeded 15 seconds)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

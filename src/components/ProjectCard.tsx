@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { Github } from './Icons'
 import type { Project } from '../data/projects'
@@ -11,19 +12,30 @@ type ProjectCardProps = {
 }
 
 function ProjectCard({ project, index }: ProjectCardProps) {
+  const [imgError, setImgError] = useState(false)
   const flip = index % 2 === 1
   const caseStudyHref = project.detailsHref || `#/project/${project.id}`
 
   return (
     <article className={`project-item ${flip ? 'project-item--flipped' : ''}`}>
-      {/* Visual illustration box */}
+      {/* Visual illustration box with real screenshot asset */}
       <Reveal
         className={`project-item__visual-wrapper ${
           flip ? 'project-item__visual-wrapper--flipped' : ''
         }`}
       >
         <div className="project-item__visual-inner">
-          <ProjectVisual id={project.id} />
+          {!imgError && project.image ? (
+            <img
+              src={project.image}
+              alt={`Interface preview for ${project.name}`}
+              className="project-item__real-image"
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <ProjectVisual id={project.id} />
+          )}
         </div>
         <span className="display project-item__watermark-index" aria-hidden="true">
           {project.index}
@@ -36,8 +48,9 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           flip ? 'project-item__content--flipped' : ''
         }`}
       >
-        <Reveal className="label-mono project-item__kicker">
-          {project.index} — {project.technologies.slice(0, 2).join(' · ')}
+        <Reveal className="project-item__kicker-wrap">
+          <span className="ref-badge">[ {project.index} ]</span>
+          <span className="ref-mono-label">{project.technologies.slice(0, 2).join(' · ')}</span>
         </Reveal>
 
         <Reveal as="h3" delay={80} className="display project-item__title">
@@ -78,7 +91,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
               className="project-item__btn project-item__btn--live"
               aria-label={`Launch live project demo for ${project.name}`}
             >
-              <span>Launch Project</span>
+              <span>Launch Demo</span>
               <ArrowUpRight className="project-item__btn-icon" aria-hidden="true" />
             </a>
           )}
@@ -89,7 +102,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           <p className="label-mono project-item__status-text">
             {project.repositoryUrl
               ? 'Learning project · source available'
-              : 'Learning example · no public source'}
+              : 'Learning example · standalone case study'}
           </p>
           <a
             href={caseStudyHref}

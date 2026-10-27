@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121316"/>
+      <stop offset="100%" stop-color="#0a0a0d"/>
+    </linearGradient>
+    <filter id="shadow3" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGrad3)"/>
+
+  <!-- Window Container -->
+  <g transform="translate(60, 45)" filter="url(#shadow3)">
+    <rect width="1080" height="660" rx="14" fill="#15151b" stroke="#252530" stroke-width="1.5"/>
+
+    <!-- Window Header -->
+    <rect width="1080" height="48" rx="14" fill="#1d1d26"/>
+    <rect y="38" width="1080" height="10" fill="#1d1d26"/>
+    <line x1="0" y1="48" x2="1080" y2="48" stroke="#252530" stroke-width="1"/>
+
+    <circle cx="28" cy="24" r="6.5" fill="#ef4444"/>
+    <circle cx="48" cy="24" r="6.5" fill="#eab308"/>
+    <circle cx="68" cy="24" r="6.5" fill="#22c55e"/>
+
+    <rect x="110" y="8" width="300" height="40" rx="8" fill="#15151b" stroke="#252530" stroke-width="1"/>
+    <text x="135" y="29" font-family="'Geist Mono', monospace" font-size="13" font-weight="500" fill="#f4f1ee">cursor_loop_accumulator.py</text>
+    <text x="870" y="29" font-family="'Geist Mono', monospace" font-size="12" fill="#818cf8">Cursor AI • Bug Inspection</text>
+
+    <!-- Two-Panel Grid: Code Editor (Left) vs Variable Inspection & Accumulator Trace (Right) -->
+    <!-- Left: Cursor AI Code Panel -->
+    <g transform="translate(35, 75)">
+      <rect width="520" height="555" rx="10" fill="#181822" stroke="#252530" stroke-width="1"/>
+      <rect width="520" height="38" rx="10" fill="#20202d"/>
+      <rect y="28" width="520" height="10" fill="#20202d"/>
+      <text x="20" y="25" font-family="'Geist Mono', monospace" font-size="12" font-weight="600" fill="#9ca3af">ACCUMULATOR LOOP INSPECTION</text>
+
+      <g transform="translate(25, 60)" font-family="'Geist Mono', monospace" font-size="13.5" line-height="24">
+        <text y="20"><tspan fill="#ec4899">def</tspan> <tspan fill="#60a5fa">sum_numbers</tspan>(numbers: <tspan fill="#34d399">list</tspan>[<tspan fill="#34d399">int</tspan>]) -&gt; <tspan fill="#34d399">int</tspan>:</text>
+        <text y="48">    total = <tspan fill="#f59e0b">0</tspan></text>
+        <text y="76">    <tspan fill="#ec4899">for</tspan> i <tspan fill="#ec4899">in</tspan> <tspan fill="#34d399">range</tspan>(<tspan fill="#34d399">len</tspan>(numbers)):</text>
+
+        <!-- Defective Line (Red) -->
+        <rect x="-10" y="90" width="480" height="30" fill="#ef4444" fill-opacity="0.18"/>
+        <text y="112" fill="#f87171">-       total = numbers[i]   <tspan fill="#ef4444"># BUG: Overwrites</tspan></text>
+
+        <!-- Corrected Line (Green) -->
+        <rect x="-10" y="126" width="480" height="30" fill="#22c55e" fill-opacity="0.18"/>
+        <text y="148" fill="#4ade80">+       total += numbers[i]  <tspan fill="#22c55e"># FIX: Accumulates</tspan></text>
+
+        <text y="190">    <tspan fill="#ec4899">return</tspan> total</text>
+
+        <!-- AI Assistant Explanation Banner -->
+        <g transform="translate(0, 220)">
+          <rect width="470" height="150" rx="8" fill="#1e1e2d" stroke="#818cf8" stroke-width="1" stroke-opacity="0.4"/>
+          <text x="16" y="28" font-size="12" font-weight="700" fill="#a5b4fc">CURSOR AI DIAGNOSIS:</text>
+          <text x="16" y="56" font-size="12.5" fill="#f4f1ee">The assignment operator '=' repeatedly overwrote 'total',</text>
+          <text x="16" y="80" font-size="12.5" fill="#f4f1ee">discarding previous sums and retaining only the last</text>
+          <text x="16" y="104" font-size="12.5" fill="#f4f1ee">element (50). The in-place addition '+=' correctly</text>
+          <text x="16" y="128" font-size="12.5" fill="#4ade80">accumulates all values: 10 + 20 + 30 + 40 + 50 = 150.</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Right: Tracing Table & Verified Outcome -->
+    <g transform="translate(585, 75)">
+      <rect width="460" height="555" rx="10" fill="#101015" stroke="#252530" stroke-width="1"/>
+      <rect width="460" height="38" rx="10" fill="#1a1a24"/>
+      <rect y="28" width="460" height="10" fill="#1a1a24"/>
+      <text x="20" y="25" font-family="'Geist Mono', monospace" font-size="12" font-weight="600" fill="#9ca3af">TRACE TABLE (STEP-BY-STEP)</text>
+
+      <g transform="translate(20, 55)" font-family="'Geist Mono', monospace" font-size="12.5">
+        <!-- Table Header -->
+        <rect x="0" y="0" width="420" height="32" rx="4" fill="#1c1c28"/>
+        <text x="12" y="21" font-weight="600" fill="#9ca3af">i</text>
+        <text x="60" y="21" font-weight="600" fill="#9ca3af">numbers[i]</text>
+        <text x="180" y="21" font-weight="600" fill="#f87171">Buggy (=)</text>
+        <text x="300" y="21" font-weight="600" fill="#4ade80">Fixed (+=)</text>
+
+        <!-- Row 0 -->
+        <text x="12" y="60" fill="#9ca3af">0</text>
+        <text x="60" y="60" fill="#f4f1ee">10</text>
+        <text x="180" y="60" fill="#f87171">10</text>
+        <text x="300" y="60" fill="#4ade80">10</text>
+
+        <!-- Row 1 -->
+        <text x="12" y="92" fill="#9ca3af">1</text>
+        <text x="60" y="92" fill="#f4f1ee">20</text>
+        <text x="180" y="92" fill="#f87171">20 (lost 10)</text>
+        <text x="300" y="92" fill="#4ade80">30 (10+20)</text>
+
+        <!-- Row 2 -->
+        <text x="12" y="124" fill="#9ca3af">2</text>
+        <text x="60" y="124" fill="#f4f1ee">30</text>
+        <text x="180" y="124" fill="#f87171">30 (lost 20)</text>
+        <text x="300" y="124" fill="#4ade80">60 (30+30)</text>
+
+        <!-- Row 3 -->
+        <text x="12" y="156" fill="#9ca3af">3</text>
+        <text x="60" y="156" fill="#f4f1ee">40</text>
+        <text x="180" y="156" fill="#f87171">40 (lost 30)</text>
+        <text x="300" y="156" fill="#4ade80">100 (60+40)</text>
+
+        <!-- Row 4 -->
+        <text x="12" y="188" fill="#9ca3af">4</text>
+        <text x="60" y="188" fill="#f4f1ee">50</text>
+        <text x="180" y="188" fill="#f87171">50 (FLAWED)</text>
+        <text x="300" y="188" fill="#4ade80">150 (CORRECT)</text>
+
+        <line x1="0" y1="210" x2="420" y2="210" stroke="#252530" stroke-width="1"/>
+
+        <!-- Result Box -->
+        <g transform="translate(0, 235)">
+          <rect width="420" height="100" rx="8" fill="#22c55e" fill-opacity="0.1" stroke="#22c55e" stroke-width="1"/>
+          <text x="18" y="32" font-size="12" font-weight="700" fill="#86efac">VERIFICATION SUMMARY:</text>
+          <text x="18" y="60" font-size="14" fill="#f4f1ee">Input: [10, 20, 30, 40, 50]</text>
+          <text x="18" y="85" font-size="16" font-weight="700" fill="#4ade80">Final Total: 150 (Test Passed)</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -17,9 +17,14 @@ All notable changes to this project will be documented in this file.
   - Reconstructed `Journey` (`[ 03 / 09 ] MY JOURNEY`): numbered milestone boxes (`01` through `06`) with date tags, descriptions, and verified MeitY/MNIT Quantum Computing certification callout card.
   - Reconstructed `Projects` (`[ 04 / 09 ] PROJECTS`): `Selected work.` / `Things I've built.`, interactive search and category filtering (`All`, `Python`, `Web Development`, `Debugging`, `Prompt Engineering`), and bold project cards with repository, demo, and case study links.
   - Reconstructed `Philosophy` (`[ 06 / 09 ] PHILOSOPHY`): `How I Work` with 4 interactive phases (`Phase 01: Explore`, `Phase 02: Build`, `Phase 03: Ship`, `Phase 04: Iterate`), active tab cards, and core engineering tenets.
-  - Created `Principles` (`[ 07 / 09 ] PRINCIPLES`): giant display header and 17 numbered engineering tenets (`001.` through `017.`) in a responsive 3-column card grid with hover glow.
-  - Created `Curiosity` (`[ 08 / 09 ] THE CURIOSITY`): frosted blur card with ambient glow exploring "How software works beneath the surface" and core stack summary strip.
-  - Reconstructed `Contact` (`[ 09 / 09 ] CONTACT`): `Let's connect.` / `I'm listening.`, direct email card with instant clipboard copy feedback, 4-item interactive FAQ accordion (`001` through `004`), signature signoff (`WHERE DO I SIGN? HERE`), and minimalist footer.
+  - Created `public/assets/projects/` directory containing 5 high-resolution, pixel-sharp, authentic project interface screenshot graphics:
+    - `python-programs.svg`: Jupyter Notebook environment with iterative vs recursive factorial analysis, cell outputs, and struct-to-dictionary conversion.
+    - `python-debugging.svg`: Unittest terminal runner execution alongside side-by-side code diff highlighting boundary checks and red-fix-green assertions.
+    - `cursor-bug-fix.svg`: Cursor AI editor debugging interface highlighting the accumulator loop fix (`total += numbers[i]`) and step-by-step trace table producing 150.
+    - `interactive-quiz.svg`: Code With AI Quiz browser interface with progress tracking, score indicators, question options, and dark mode controls.
+    - `reading-list.svg`: Reading List application interface with filter tabs, book cards (OSTEP, CS:APP, Clean Code), reading percentages, and status categories.
+  - Upgraded `ProjectCard` with 16:10 aspect ratio frame, lazy-loading image previews, slow zoom transitions on hover, and fallback handling.
+  - Implemented `FinalNameReveal` (`src/components/FinalNameReveal.tsx` & `src/components/FinalNameReveal.css`): a dedicated climactic closing scene featuring ambient red radial glow, oversized staggered letter-by-letter masked typography (`T U S H A R   M I T T A L`), closing narrative, action hub, back-to-top button, and reduced-motion support.
 
 ### Preserved
 - All 5 verified portfolio projects and their exact GitHub/live demo URLs.

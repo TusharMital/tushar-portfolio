@@ -1,0 +1,212 @@
+.final-reveal-section {
+  position: relative;
+  padding: 8rem 0 3rem;
+  background-color: #000000;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+[data-theme='light'] .final-reveal-section,
+.light .final-reveal-section {
+  background-color: #fbfbf9;
+}
+
+.final-reveal__ambient-glow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vw;
+  height: 50vh;
+  background: radial-gradient(
+    circle,
+    rgba(255, 76, 36, 0.12) 0%,
+    rgba(244, 72, 73, 0.04) 45%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.final-reveal__container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.final-reveal__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Staggered Name Reveal */
+.final-reveal__name {
+  font-size: clamp(2.75rem, 8.2vw, 7.25rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--foreground);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.final-reveal__word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.final-reveal__space {
+  display: inline-block;
+  width: clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.final-reveal__char-box {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.final-reveal__char {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Triggered State */
+.final-reveal-section.is-revealed .final-reveal__char {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Closing narrative */
+.final-reveal__closing-content {
+  max-width: 680px;
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.final-reveal__closing-summary {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--token-accent-crimson, #f44849);
+}
+
+.final-reveal__closing-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+/* Action Hub */
+.final-reveal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 6rem;
+}
+
+.final-reveal__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.final-reveal__btn--primary {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.final-reveal__btn--primary:hover {
+  background-color: var(--token-accent-crimson, #f44849);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.final-reveal__btn--secondary {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.final-reveal__btn--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.final-reveal__btn--top {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.final-reveal__btn--top:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+  transform: translateY(-2px);
+}
+
+.final-reveal__btn-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.final-reveal__arrow-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.final-reveal__btn:hover .final-reveal__arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Footer Bottom Bar */
+.final-reveal__footer-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .final-reveal__char {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

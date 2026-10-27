@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141416"/>
+      <stop offset="100%" stop-color="#0c0c0e"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e24"/>
+      <stop offset="100%" stop-color="#16161b"/>
+    </linearGradient>
+    <filter id="shadow1" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="750" fill="url(#bgGrad1)"/>
+
+  <!-- Window Container -->
+  <g transform="translate(60, 45)" filter="url(#shadow1)">
+    <!-- Window Body -->
+    <rect width="1080" height="660" rx="14" fill="#18181f" stroke="#2d2d38" stroke-width="1.5"/>
+
+    <!-- Window Title Bar -->
+    <rect width="1080" height="48" rx="14" fill="#21212b"/>
+    <rect y="38" width="1080" height="10" fill="#21212b"/>
+    <line x1="0" y1="48" x2="1080" y2="48" stroke="#2d2d38" stroke-width="1"/>
+
+    <!-- Traffic Lights -->
+    <circle cx="28" cy="24" r="6.5" fill="#ef4444"/>
+    <circle cx="48" cy="24" r="6.5" fill="#eab308"/>
+    <circle cx="68" cy="24" r="6.5" fill="#22c55e"/>
+
+    <!-- Tab / Document Title -->
+    <rect x="110" y="8" width="280" height="40" rx="8" fill="#18181f" stroke="#2d2d38" stroke-width="1"/>
+    <path d="M128 20 h10 v10 h-10 z" fill="#3b82f6" opacity="0.8"/>
+    <text x="146" y="29" font-family="'Geist Mono', 'JetBrains Mono', monospace" font-size="13" font-weight="500" fill="#f4f1ee">algorithmic_collection.ipynb</text>
+    <circle cx="365" cy="28" r="4" fill="#22c55e" opacity="0.8"/>
+
+    <!-- Status / Kernel Indicator -->
+    <text x="940" y="29" font-family="'Geist Mono', monospace" font-size="12" fill="#9ca3af">Python 3.11 • Idle</text>
+
+    <!-- Jupyter Notebook Toolbar -->
+    <rect y="48" width="1080" height="40" fill="#1c1c24"/>
+    <line x1="0" y1="88" x2="1080" y2="88" stroke="#2d2d38" stroke-width="1"/>
+    <text x="32" y="73" font-family="'Geist', sans-serif" font-size="13" font-weight="500" fill="#71717a">File   Edit   View   Insert   Cell   Kernel   Widgets   Help</text>
+
+    <!-- Notebook Content Area -->
+    <!-- Cell 1: Markdown -->
+    <g transform="translate(40, 110)">
+      <text x="0" y="24" font-family="'Geist', sans-serif" font-size="20" font-weight="700" fill="#f4f1ee"># 01. Fibonacci &amp; Recursive Struct Serialization</text>
+      <text x="0" y="52" font-family="'Geist', sans-serif" font-size="14" fill="#9ca3af">A comparative study of recursion stack frames vs iterative loop optimization in Python 3.</text>
+    </g>
+
+    <!-- Cell 2: Code In [1] -->
+    <g transform="translate(40, 185)">
+      <rect width="1000" height="230" rx="8" fill="#121217" stroke="#272733" stroke-width="1"/>
+      <rect x="0" y="0" width="60" height="230" rx="8" fill="#16161d"/>
+      <text x="12" y="32" font-family="'Geist Mono', monospace" font-size="12" font-weight="600" fill="#3b82f6">In [1]:</text>
+
+      <!-- Code lines -->
+      <g transform="translate(80, 15)" font-family="'Geist Mono', 'JetBrains Mono', monospace" font-size="13.5" line-height="24">
+        <text y="20"><tspan fill="#ec4899">def</tspan> <tspan fill="#60a5fa">fibonacci_iterative</tspan>(n: <tspan fill="#34d399">int</tspan>) -&gt; <tspan fill="#34d399">list</tspan>[<tspan fill="#34d399">int</tspan>]:</text>
+        <text y="46">    <tspan fill="#ec4899">if</tspan> n &lt;= <tspan fill="#f59e0b">0</tspan>: <tspan fill="#ec4899">return</tspan> []</text>
+        <text y="72">    seq = [<tspan fill="#f59e0b">0</tspan>, <tspan fill="#f59e0b">1</tspan>]</text>
+        <text y="98">    <tspan fill="#ec4899">while</tspan> <tspan fill="#34d399">len</tspan>(seq) &lt; n:</text>
+        <text y="124">        seq.<tspan fill="#60a5fa">append</tspan>(seq[-<tspan fill="#f59e0b">1</tspan>] + seq[-<tspan fill="#f59e0b">2</tspan>])</text>
+        <text y="150">    <tspan fill="#ec4899">return</tspan> seq[:n]</text>
+        <text y="184"><tspan fill="#71717a"># Execution test</tspan></text>
+        <text y="206"><tspan fill="#f4f1ee">result = fibonacci_iterative(</tspan><tspan fill="#f59e0b">10</tspan><tspan fill="#f4f1ee">)</tspan></text>
+      </g>
+    </g>
+
+    <!-- Cell 2 Output Out [1] -->
+    <g transform="translate(40, 428)">
+      <rect width="1000" height="65" rx="8" fill="#141419" stroke="#22c55e" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="12" y="38" font-family="'Geist Mono', monospace" font-size="12" font-weight="600" fill="#22c55e">Out [1]:</text>
+      <text x="80" y="38" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#a7f3d0">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</text>
+    </g>
+
+    <!-- Cell 3: Struct to Dict In [2] -->
+    <g transform="translate(40, 508)">
+      <rect width="1000" height="120" rx="8" fill="#121217" stroke="#272733" stroke-width="1"/>
+      <rect x="0" y="0" width="60" height="120" rx="8" fill="#16161d"/>
+      <text x="12" y="32" font-family="'Geist Mono', monospace" font-size="12" font-weight="600" fill="#3b82f6">In [2]:</text>
+
+      <g transform="translate(80, 15)" font-family="'Geist Mono', monospace" font-size="13.5">
+        <text y="20"><tspan fill="#ec4899">def</tspan> <tspan fill="#60a5fa">record_to_dict</tspan>(record) -&gt; <tspan fill="#34d399">dict</tspan>:</text>
+        <text y="46">    <tspan fill="#ec4899">return</tspan> record.<tspan fill="#60a5fa">_asdict</tspan>() <tspan fill="#ec4899">if</tspan> <tspan fill="#34d399">hasattr</tspan>(record, <tspan fill="#a7f3d0">"_asdict"</tspan>) <tspan fill="#ec4899">else</tspan> <tspan fill="#34d399">vars</tspan>(record)</text>
+        <text y="76"><tspan fill="#71717a">&gt;&gt;&gt; record_to_dict(Point(x=10, y=25)) -&gt; {'x': 10, 'y': 25}</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

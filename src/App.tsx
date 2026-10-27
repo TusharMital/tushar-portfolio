@@ -4,6 +4,7 @@ import CaseStudyView from './components/CaseStudyView'
 import Chatbot from './components/Chatbot'
 import Contact from './components/Contact'
 import Curiosity from './components/Curiosity'
+import FinalNameReveal from './components/FinalNameReveal'
 import Hero from './components/Hero'
 import LearningJourney from './components/LearningJourney'
 import Navbar from './components/Navbar'
@@ -87,8 +88,11 @@ function App() {
             {/* 08 / THE CURIOSITY */}
             <Curiosity />
 
-            {/* 09 / CONTACT & FOOTER */}
+            {/* 09 / CONTACT */}
             <Contact />
+
+            {/* 10 / FINAL NAME REVEAL & CLOSING SCENE */}
+            <FinalNameReveal />
 
             {/* AI Assistant Drawer & Modal */}
             <Chatbot

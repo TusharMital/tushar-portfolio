@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#0f0f12"/>
+    </linearGradient>
+    <filter id="shadow5" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGrad5)"/>
+
+  <!-- Browser Frame -->
+  <g transform="translate(60, 45)" filter="url(#shadow5)">
+    <rect width="1080" height="660" rx="14" fill="#121215" stroke="#27272a" stroke-width="1.5"/>
+
+    <!-- Header -->
+    <rect width="1080" height="48" rx="14" fill="#1a1a20"/>
+    <rect y="38" width="1080" height="10" fill="#1a1a20"/>
+    <line x1="0" y1="48" x2="1080" y2="48" stroke="#27272a" stroke-width="1"/>
+
+    <circle cx="28" cy="24" r="6.5" fill="#ef4444"/>
+    <circle cx="48" cy="24" r="6.5" fill="#eab308"/>
+    <circle cx="68" cy="24" r="6.5" fill="#22c55e"/>
+
+    <!-- URL Bar -->
+    <rect x="110" y="8" width="580" height="32" rx="6" fill="#121215" stroke="#27272a" stroke-width="1"/>
+    <text x="130" y="29" font-family="'Geist', sans-serif" font-size="13" fill="#a1a1aa">https://reading-list-app-one.vercel.app/</text>
+
+    <!-- App Top Bar Inside Browser -->
+    <g transform="translate(0, 48)">
+      <rect width="1080" height="70" fill="#18181e"/>
+      <line x1="0" y1="70" x2="1080" y2="70" stroke="#27272a" stroke-width="1"/>
+      <text x="45" y="42" font-family="'Fraunces', serif" font-size="22" font-weight="700" fill="#f4f1ee">Reading List</text>
+      <text x="180" y="42" font-family="'Geist Mono', monospace" font-size="12" fill="#71717a">React 19 + TypeScript</text>
+
+      <!-- Filter Tabs -->
+      <g transform="translate(420, 20)">
+        <rect x="0" y="0" width="70" height="30" rx="6" fill="#27272a"/>
+        <text x="18" y="20" font-family="'Geist', sans-serif" font-size="12" font-weight="600" fill="#f4f1ee">All (6)</text>
+
+        <rect x="80" y="0" width="115" height="30" rx="6" fill="#1e1e24"/>
+        <text x="94" y="20" font-family="'Geist', sans-serif" font-size="12" fill="#a1a1aa">Want to Read</text>
+
+        <rect x="205" y="0" width="90" height="30" rx="6" fill="#2563eb" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+        <text x="220" y="20" font-family="'Geist', sans-serif" font-size="12" font-weight="600" fill="#60a5fa">Reading (2)</text>
+
+        <rect x="305" y="0" width="85" height="30" rx="6" fill="#1e1e24"/>
+        <text x="320" y="20" font-family="'Geist', sans-serif" font-size="12" fill="#a1a1aa">Finished</text>
+      </g>
+
+      <!-- Add Book Button -->
+      <rect x="925" y="20" width="110" height="32" rx="6" fill="#ff4c24"/>
+      <text x="945" y="41" font-family="'Geist', sans-serif" font-size="13" font-weight="700" fill="#000000">+ Add Book</text>
+    </g>
+
+    <!-- Books Cards Grid -->
+    <g transform="translate(45, 140)">
+      <!-- Card 1: Operating Systems -->
+      <g transform="translate(0, 0)">
+        <rect width="480" height="225" rx="12" fill="#181820" stroke="#27272a" stroke-width="1"/>
+        <!-- Book spine representation -->
+        <rect x="20" y="20" width="95" height="135" rx="6" fill="#1e3a8a"/>
+        <text x="30" y="70" font-family="'Geist', sans-serif" font-size="12" font-weight="700" fill="#bfdbfe">OSTEP</text>
+        <text x="30" y="90" font-family="'Geist', sans-serif" font-size="9" fill="#93c5fd">Three Easy Pieces</text>
+
+        <!-- Content -->
+        <g transform="translate(130, 25)">
+          <rect x="0" y="0" width="75" height="22" rx="4" fill="#2563eb" fill-opacity="0.2"/>
+          <text x="12" y="15" font-family="'Geist Mono', monospace" font-size="11" font-weight="600" fill="#60a5fa">READING</text>
+          <text x="0" y="50" font-family="'Geist', sans-serif" font-size="17" font-weight="700" fill="#f4f1ee">Operating Systems: Three Pieces</text>
+          <text x="0" y="74" font-family="'Geist', sans-serif" font-size="13" fill="#a1a1aa">Remzi H. Arpaci-Dusseau</text>
+          
+          <!-- Progress -->
+          <text x="0" y="112" font-family="'Geist Mono', monospace" font-size="12" fill="#9ca3af">Progress: 64%</text>
+          <rect x="0" y="122" width="310" height="6" rx="3" fill="#27272a"/>
+          <rect x="0" y="122" width="198" height="6" rx="3" fill="#3b82f6"/>
+        </g>
+      </g>
+
+      <!-- Card 2: Computer Systems -->
+      <g transform="translate(510, 0)">
+        <rect width="480" height="225" rx="12" fill="#181820" stroke="#27272a" stroke-width="1"/>
+        <rect x="20" y="20" width="95" height="135" rx="6" fill="#831843"/>
+        <text x="30" y="70" font-family="'Geist', sans-serif" font-size="12" font-weight="700" fill="#fbcfe8">CS:APP</text>
+        <text x="30" y="90" font-family="'Geist', sans-serif" font-size="9" fill="#f472b6">Programmer's View</text>
+
+        <g transform="translate(130, 25)">
+          <rect x="0" y="0" width="75" height="22" rx="4" fill="#2563eb" fill-opacity="0.2"/>
+          <text x="12" y="15" font-family="'Geist Mono', monospace" font-size="11" font-weight="600" fill="#60a5fa">READING</text>
+          <text x="0" y="50" font-family="'Geist', sans-serif" font-size="17" font-weight="700" fill="#f4f1ee">Computer Systems: CS:APP</text>
+          <text x="0" y="74" font-family="'Geist', sans-serif" font-size="13" fill="#a1a1aa">Randal E. Bryant, David R. O'Hallaron</text>
+
+          <text x="0" y="112" font-family="'Geist Mono', monospace" font-size="12" fill="#9ca3af">Progress: 42%</text>
+          <rect x="0" y="122" width="310" height="6" rx="3" fill="#27272a"/>
+          <rect x="0" y="122" width="130" height="6" rx="3" fill="#ec4899"/>
+        </g>
+      </g>
+
+      <!-- Card 3: Clean Code -->
+      <g transform="translate(0, 250)">
+        <rect width="480" height="225" rx="12" fill="#181820" stroke="#27272a" stroke-width="1"/>
+        <rect x="20" y="20" width="95" height="135" rx="6" fill="#065f46"/>
+        <text x="30" y="70" font-family="'Geist', sans-serif" font-size="12" font-weight="700" fill="#a7f3d0">CLEAN</text>
+        <text x="30" y="90" font-family="'Geist', sans-serif" font-size="9" fill="#6ee7b7">Code Craftsmanship</text>
+
+        <g transform="translate(130, 25)">
+          <rect x="0" y="0" width="80" height="22" rx="4" fill="#059669" fill-opacity="0.2"/>
+          <text x="12" y="15" font-family="'Geist Mono', monospace" font-size="11" font-weight="600" fill="#34d399">FINISHED</text>
+          <text x="0" y="50" font-family="'Geist', sans-serif" font-size="17" font-weight="700" fill="#f4f1ee">Clean Code: Agile Handbook</text>
+          <text x="0" y="74" font-family="'Geist', sans-serif" font-size="13" fill="#a1a1aa">Robert C. Martin (Uncle Bob)</text>
+
+          <text x="0" y="112" font-family="'Geist Mono', monospace" font-size="12" fill="#34d399">Completed (100%)</text>
+          <rect x="0" y="122" width="310" height="6" rx="3" fill="#27272a"/>
+          <rect x="0" y="122" width="310" height="6" rx="3" fill="#10b981"/>
+        </g>
+      </g>
+
+      <!-- Card 4: Kurose & Ross Networking -->
+      <g transform="translate(510, 250)">
+        <rect width="480" height="225" rx="12" fill="#181820" stroke="#27272a" stroke-width="1"/>
+        <rect x="20" y="20" width="95" height="135" rx="6" fill="#78350f"/>
+        <text x="30" y="70" font-family="'Geist', sans-serif" font-size="12" font-weight="700" fill="#fde68a">NETWORKS</text>
+        <text x="30" y="90" font-family="'Geist', sans-serif" font-size="9" fill="#fcd34d">Top-Down Approach</text>
+
+        <g transform="translate(130, 25)">
+          <rect x="0" y="0" width="100" height="22" rx="4" fill="#d97706" fill-opacity="0.2"/>
+          <text x="12" y="15" font-family="'Geist Mono', monospace" font-size="11" font-weight="600" fill="#fbbf24">WANT TO READ</text>
+          <text x="0" y="50" font-family="'Geist', sans-serif" font-size="17" font-weight="700" fill="#f4f1ee">Computer Networking</text>
+          <text x="0" y="74" font-family="'Geist', sans-serif" font-size="13" fill="#a1a1aa">James Kurose, Keith Ross</text>
+
+          <text x="0" y="112" font-family="'Geist Mono', monospace" font-size="12" fill="#71717a">In Queue • CS144 Parallel Study</text>
+          <rect x="0" y="122" width="310" height="6" rx="3" fill="#27272a"/>
+          <rect x="0" y="122" width="20" height="6" rx="3" fill="#f59e0b"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

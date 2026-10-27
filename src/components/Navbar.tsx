@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { id: 'principles', label: 'Principles' },
   { id: 'curiosity', label: 'Curiosity' },
   { id: 'contact', label: 'Contact' },
+  { id: 'closing', label: 'Tushar Mittal' },
 ]
 
 type NavbarProps = {

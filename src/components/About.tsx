@@ -1,105 +1,108 @@
-import { Reveal, SectionLabel } from './Reveal'
+import { Reveal } from './Reveal'
 import './About.css'
 
-const INTERESTS = [
-  'Programming fundamentals & debugging',
-  'Operating systems & computer architecture',
-  'Linux, networking & protocols',
-  'Data structures & algorithms',
-  'Quantum computing',
+const SYSTEMS_AREAS = [
+  'Programming fundamentals & C/C++ memory models',
+  'Operating systems, CPU scheduling & concurrency',
+  'Computer architecture & hardware abstraction layers',
+  'Linux & WSL2 terminal workflows',
+  'Computer networks (CS144 & Top-Down layered protocols)',
 ]
 
-const COURSEWORK = [
-  'Prompt design & refinement',
-  'AI-assisted coding',
-  'Debugging & testing',
-  'Code review & documentation',
-  'Building & deploying web apps',
+const AI_WORKFLOWS = [
+  'Prompt design, constraint mapping & boundary definition',
+  'AI-assisted development with line-by-line diff inspection',
+  'Test-driven verification (unittest, red-fix-green)',
+  'Architectural documentation & changelog maintenance',
+  'Deploying full-stack web applications on modern infrastructure',
 ]
 
-function About() {
+export default function About() {
   return (
-    <section id="about" className="about-section" aria-labelledby="about-heading">
-      <div className="about-section__container">
-        <Reveal>
-          <SectionLabel n="01">About</SectionLabel>
-        </Reveal>
+    <section id="about" className="ref-about-section" aria-labelledby="about-heading">
+      <div className="ref-section-container">
+        {/* Section Header with [ 01 / 09 ] Pill */}
+        <div className="ref-about__badge-row">
+          <span className="ref-badge">[ 01 / 09 ]</span>
+          <span className="ref-mono-label">ABOUT</span>
+        </div>
 
-        <div className="about-section__header-grid">
-          <Reveal as="h2" id="about-heading" className="display about-section__title">
-            Second-year CS student at{' '}
-            <em className="about-section__highlight">JECRC University</em>,
-            curious about what happens{' '}
-            <span className="text-outline">beneath</span> the surface.
-          </Reveal>
+        {/* Main Content Split */}
+        <div className="ref-about__grid">
+          {/* Left Column: Big Statement */}
+          <div className="ref-about__left">
+            <Reveal as="h2" id="about-heading" className="ref-about__title display">
+              Second-year CS student at{' '}
+              <span className="ref-about__highlight">JECRC University</span>,
+              curious about what happens beneath the surface.
+            </Reveal>
+          </div>
 
-          <div className="about-section__narrative">
+          {/* Right Column: Narrative */}
+          <div className="ref-about__right">
             <Reveal delay={100}>
-              <p className="about-section__p">
+              <p className="ref-about__narrative-text">
                 I’m Tushar Mittal, a second-year Computer Science undergraduate at
                 JECRC University. I’m interested in how software works—from
                 programming fundamentals through operating systems, computer
-                architecture and computer networks.
+                architecture, and computer networks.
               </p>
             </Reveal>
             <Reveal delay={200}>
-              <p className="about-section__p">
-                My Prompt Engineering coursework explores how AI tools can help
-                write programs, investigate errors, test behaviour, document and
-                deploy software.
+              <p className="ref-about__narrative-text">
+                My Prompt Engineering and systems coursework explores how modern AI tools can help
+                write programs, investigate errors, test behavior, document, and
+                deploy software—while preserving rigorous engineering standards.
               </p>
             </Reveal>
-            <Reveal
-              delay={300}
-              className="about-section__quote"
-            >
-              <p>
-                I learn by doing the work itself: coursework, coding exercises,
-                debugging, documentation and practical projects. I treat AI as a
+            <Reveal delay={300} className="ref-about__quote-box">
+              <p className="ref-about__quote-text">
+                “I learn by doing the work itself: coursework, coding exercises,
+                debugging, documentation, and practical projects. I treat AI as a
                 development aid—not a substitute for understanding. Evaluate,
-                inspect, test, iterate.
+                inspect, test, iterate.”
               </p>
             </Reveal>
           </div>
         </div>
 
         {/* Two Focus Cards */}
-        <div className="about-section__cards-grid">
-          {/* Broader CS Interests */}
-          <Reveal delay={100} className="about-section__card">
-            <div className="label-mono about-section__card-tag about-section__card-tag--primary">
-              // fundamentals
+        <div className="ref-about__cards-grid">
+          {/* Card 1: Systems */}
+          <Reveal delay={150} className="ref-about__card">
+            <div className="ref-about__card-header">
+              <span className="ref-mono-label">// SYSTEMS &amp; COMPUTING</span>
             </div>
-            <h3 className="display about-section__card-title">
-              Broader CS interests
+            <h3 className="ref-about__card-title display">
+              Systems &amp; Low-Level Computing
             </h3>
-            <ul className="about-section__card-list">
-              {INTERESTS.map((item, i) => (
-                <li key={item} className="about-section__card-item">
-                  <span className="label-mono about-section__card-num">
+            <ul className="ref-about__card-list">
+              {SYSTEMS_AREAS.map((item, i) => (
+                <li key={item} className="ref-about__card-item">
+                  <span className="ref-about__card-num">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="about-section__card-text">{item}</span>
+                  <span className="ref-about__card-label">{item}</span>
                 </li>
               ))}
             </ul>
           </Reveal>
 
-          {/* Prompt Engineering Coursework */}
-          <Reveal delay={250} className="about-section__card">
-            <div className="label-mono about-section__card-tag about-section__card-tag--signal">
-              // coursework
+          {/* Card 2: AI & Prompt Engineering */}
+          <Reveal delay={250} className="ref-about__card">
+            <div className="ref-about__card-header">
+              <span className="ref-mono-label">// AI &amp; WORKFLOWS</span>
             </div>
-            <h3 className="display about-section__card-title">
-              Prompt Engineering coursework
+            <h3 className="ref-about__card-title display">
+              Prompt Engineering &amp; AI Workflows
             </h3>
-            <ul className="about-section__card-list">
-              {COURSEWORK.map((item, i) => (
-                <li key={item} className="about-section__card-item">
-                  <span className="label-mono about-section__card-num">
+            <ul className="ref-about__card-list">
+              {AI_WORKFLOWS.map((item, i) => (
+                <li key={item} className="ref-about__card-item">
+                  <span className="ref-about__card-num">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="about-section__card-text">{item}</span>
+                  <span className="ref-about__card-label">{item}</span>
                 </li>
               ))}
             </ul>
@@ -109,5 +112,3 @@ function About() {
     </section>
   )
 }
-
-export default About

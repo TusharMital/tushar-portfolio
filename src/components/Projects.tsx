@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Search, X } from 'lucide-react'
 import { projects } from '../data/projects'
 import ProjectCard from './ProjectCard'
-import { Reveal, SectionLabel } from './Reveal'
+import { Reveal } from './Reveal'
 import './Projects.css'
 
 const CATEGORIES = [
@@ -61,16 +61,25 @@ function Projects() {
 
   return (
     <section id="projects" className="projects-section" aria-labelledby="projects-heading">
-      <div className="projects-section__container">
-        <Reveal>
-          <SectionLabel n="03">Projects</SectionLabel>
-        </Reveal>
+      <div className="ref-section-container">
+        {/* Section Header with [ 04 / 09 ] Pill */}
+        <div className="ref-projects__badge-row">
+          <span className="ref-badge">[ 04 / 09 ]</span>
+          <span className="ref-mono-label">PROJECTS</span>
+        </div>
 
         {/* Section Header with Search & Filter */}
         <div className="projects-section__header">
-          <Reveal as="h2" id="projects-heading" className="display projects-section__title">
-            Projects<span className="projects-section__title-dot">.</span>
-          </Reveal>
+          <div>
+            <Reveal as="h2" id="projects-heading" className="display projects-section__title">
+              Selected work.
+            </Reveal>
+            <Reveal delay={80}>
+              <p className="projects-section__subtitle">
+                Things I've built — hands-on systems I've shipped or am actively exploring.
+              </p>
+            </Reveal>
+          </div>
 
           <Reveal delay={100} className="projects-section__controls">
             {/* Search Bar */}

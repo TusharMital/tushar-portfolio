@@ -1,0 +1,100 @@
+.ref-curiosity-section {
+  padding: 7rem 0;
+  position: relative;
+  background-color: var(--background);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.ref-curiosity__badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.ref-curiosity__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.ref-curiosity__title {
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Card Wrapper with Ambient Glow */
+.ref-curiosity__card-wrapper {
+  position: relative;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.ref-curiosity__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 76, 36, 0.12) 0%,
+    rgba(244, 72, 73, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ref-curiosity__card {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 20px;
+  background: rgba(21, 21, 21, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+[data-theme='light'] .ref-curiosity__card,
+.light .ref-curiosity__card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+}
+
+.ref-curiosity__paragraph {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.ref-curiosity__footer-strip {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ref-curiosity__stack-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+  letter-spacing: 0.02em;
+}

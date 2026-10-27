@@ -1,95 +1,92 @@
-import type { CSSProperties } from 'react'
-import { ArrowDownRight } from 'lucide-react'
-import { Github, Linkedin } from './Icons'
+import { useEffect, useState } from 'react'
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import ParticleField from './ParticleField'
 import './Hero.css'
 
-const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties
+const ROTATING_PHRASES = [
+  'shipping things that matter.',
+  'systems, web & AI.',
+  "even if you aren't one.",
+]
 
-function Hero() {
+export default function Hero() {
+  const [index, setIndex] = useState(0)
+  const [fade, setFade] = useState(true)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFade(false)
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % ROTATING_PHRASES.length)
+        setFade(true)
+      }, 300)
+    }, 3200)
+
+    return () => clearInterval(timer)
+  }, [])
+
   return (
-    <section id="top" className="hero-section" aria-labelledby="hero-heading">
-      <ParticleField />
-      <div className="hero-section__fade" aria-hidden="true" />
+    <section id="top" className="ref-hero" aria-labelledby="hero-heading">
+      {/* Background Graphic Treatment with Gradient Mask */}
+      <div className="ref-hero__bg-wrapper" aria-hidden="true">
+        <ParticleField />
+        <div className="ref-hero__gradient-mask" />
+      </div>
 
-      <div className="hero-section__container">
+      <div className="ref-hero__content">
         {/* Status Chip */}
-        <div className="label-mono fade-in hero-section__status" style={d(200)}>
-          <span className="hero-section__status-dot">
-            <span className="hero-section__status-ping" />
-            <span className="hero-section__status-core" />
+        <div className="ref-hero__status-badge">
+          <span className="ref-hero__status-dot">
+            <span className="ref-hero__status-ping" />
+            <span className="ref-hero__status-core" />
           </span>
-          <span>Building · Learning · Experimenting</span>
+          <span className="ref-hero__status-text">
+            Available for opportunities · CS @ JECRC
+          </span>
         </div>
 
-        {/* Hero Title */}
-        <h1 id="hero-heading" className="display hero-name">
-          <span className="name-line">
-            <span style={d(100)}>Tushar</span>
-          </span>
-          <span className="name-line hero-section__name-offset">
-            <span style={d(260)}>
-              <em className="hero-section__initial">M</em>ittal
-            </span>
+        {/* Main Headline */}
+        <h1 id="hero-heading" className="ref-hero__headline display">
+          <span className="ref-hero__line-main">Build at the frontier</span>
+          <span className={`ref-hero__line-rotating ${fade ? 'is-visible' : 'is-hidden'}`}>
+            {ROTATING_PHRASES[index]}
           </span>
         </h1>
 
-        {/* Body Content Grid */}
-        <div className="hero-section__body">
-          <p className="label-mono fade-in hero-section__role" style={d(700)}>
-            Computer Science Undergraduate
-            <br />
-            Exploring Programming &amp; Systems
-            <br />
-            Systems Enthusiast
-          </p>
-          <p className="fade-in hero-section__copy" style={d(850)}>
-            I explore how software works beneath the surface—and use code,
-            thoughtful prompts and experimentation to turn ideas into working
-            applications.
-          </p>
-          <div className="fade-in hero-section__actions" style={d(1000)}>
-            <a href="#projects" className="hero-section__btn hero-section__btn--primary">
-              <span>View Projects</span>
-              <ArrowDownRight className="hero-section__btn-icon" aria-hidden="true" />
-            </a>
-            <a href="#contact" className="hero-section__btn hero-section__btn--outline">
-              <span>Contact Me</span>
-            </a>
-          </div>
+        {/* Subtitle / Bio summary */}
+        <p className="ref-hero__subhead">
+          Computer Science engineering student at JECRC University with an active interest in
+          systems engineering, low-level programming, web development and AI-assisted workflows.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="ref-hero__actions">
+          <a href="#projects" className="ref-hero__btn ref-hero__btn--primary">
+            <span>Explore Work</span>
+            <ArrowDownRight className="ref-hero__btn-icon" aria-hidden="true" />
+          </a>
+          <a href="#contact" className="ref-hero__btn ref-hero__btn--secondary">
+            <span>Contact Me</span>
+            <ArrowUpRight className="ref-hero__btn-icon" aria-hidden="true" />
+          </a>
         </div>
 
-        {/* Footer Bar */}
-        <div className="fade-in hero-section__footer" style={d(1150)}>
-          <div className="hero-section__links">
-            <a
-              href="https://github.com/TusharMital"
-              target="_blank"
-              rel="noreferrer"
-              className="label-mono link-underline hero-section__social-link"
-            >
-              <Github className="hero-section__social-icon" aria-hidden="true" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/tushar-mittal-179761364/"
-              target="_blank"
-              rel="noreferrer"
-              className="label-mono link-underline hero-section__social-link"
-            >
-              <Linkedin className="hero-section__social-icon" aria-hidden="true" />
-              <span>LinkedIn</span>
-            </a>
+        {/* Meta details footer */}
+        <div className="ref-hero__meta">
+          <div className="ref-hero__meta-item">
+            <span className="ref-mono-label">Focus</span>
+            <span className="ref-hero__meta-value">Systems &amp; Modern Web</span>
           </div>
-
-          <a href="#about" className="label-mono hero-section__scroll" aria-label="Scroll to About section">
-            <span>Scroll</span>
-            <span className="scroll-cue" aria-hidden="true" />
-          </a>
+          <div className="ref-hero__meta-item">
+            <span className="ref-mono-label">Location</span>
+            <span className="ref-hero__meta-value">Jaipur, India</span>
+          </div>
+          <div className="ref-hero__meta-item">
+            <span className="ref-mono-label">Institution</span>
+            <span className="ref-hero__meta-value">JECRC University '27</span>
+          </div>
         </div>
       </div>
     </section>
   )
 }
-
-export default Hero

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { ArrowUpRight, Copy, Check } from 'lucide-react'
-import { Reveal, SectionLabel } from './Reveal'
+import { ArrowUpRight, Copy, Check, ChevronDown } from 'lucide-react'
+import { Reveal } from './Reveal'
 import './Contact.css'
 
 const CURRENT_YEAR = new Date().getFullYear()
@@ -12,144 +12,237 @@ const CONTACT_INFO = {
   linkedinUrl: 'https://www.linkedin.com/in/tushar-mittal-179761364/',
 }
 
-function Contact() {
+const FAQS = [
+  {
+    num: '001',
+    question: 'What do you work on?',
+    answer:
+      'Core computer science fundamentals, low-level programming in C & C++, web applications in React 19 & TypeScript, operating systems internals, and test-driven debugging.',
+  },
+  {
+    num: '002',
+    question: 'Where are you based?',
+    answer:
+      'JECRC University, Jaipur, Rajasthan, India — open to remote engineering collaborations, internships, and open-source contributions.',
+  },
+  {
+    num: '003',
+    question: 'Open to collaborate?',
+    answer:
+      'Always — especially on systems programming, debugging challenges, developer tooling, web apps, or interesting computer science problems.',
+  },
+  {
+    num: '004',
+    question: 'Best way to reach you?',
+    answer:
+      'Email tushar.mitt6@gmail.com, connect on GitHub @TusharMital, or message via LinkedIn in/tushar-mittal.',
+  },
+]
+
+export default function Contact() {
   const [copied, setCopied] = useState(false)
-  const [copyError, setCopyError] = useState(false)
+  const [openFaq, setOpenFaq] = useState<number | null>(0)
 
   const handleCopyEmail = async () => {
     try {
-      setCopyError(false)
       await navigator.clipboard.writeText(CONTACT_INFO.email)
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      setTimeout(() => setCopied(false), 2200)
     } catch {
-      setCopyError(true)
+      // fallback
     }
   }
 
+  const toggleFaq = (idx: number) => {
+    setOpenFaq((prev) => (prev === idx ? null : idx))
+  }
+
   return (
-    <section id="contact" className="contact-section" aria-labelledby="contact-heading">
-      <div className="grid-lines contact-section__grid-bg" aria-hidden="true" />
+    <section id="contact" className="ref-contact-section" aria-labelledby="contact-heading">
+      <div className="ref-section-container">
+        {/* Section Header with [ 09 / 09 ] Pill */}
+        <div className="ref-contact__badge-row">
+          <span className="ref-badge">[ 09 / 09 ]</span>
+          <span className="ref-mono-label">CONTACT</span>
+        </div>
 
-      <div className="contact-section__container">
-        <Reveal>
-          <SectionLabel n="07">Contact</SectionLabel>
-        </Reveal>
-
-        <Reveal as="h2" id="contact-heading" className="display contact-section__title">
-          Curious about what
-          <br />
-          we can <em className="contact-section__highlight">build?</em>
-        </Reveal>
-
-        <div className="contact-section__body">
-          <Reveal className="contact-section__intro">
-            I’m exploring the intersection of computer science fundamentals,
-            thoughtful prompting, and practical software development. Whether you
-            have questions about my coursework, want to discuss systems and
-            networking topics, or are interested in collaborating, let’s connect.
+        {/* Section Title */}
+        <div className="ref-contact__header">
+          <Reveal as="h2" id="contact-heading" className="ref-contact__title display">
+            Let's connect.
           </Reveal>
+          <Reveal delay={80}>
+            <p className="ref-contact__subtitle">I'm listening.</p>
+          </Reveal>
+        </div>
 
-          <div className="contact-section__details">
-            {/* Direct Email Address with Copy Button */}
-            <Reveal className="contact-section__email-row">
-              <a
-                href={`mailto:${CONTACT_INFO.email}?subject=Portfolio%20Inquiry%20-%20Tushar%20Mittal`}
-                className="display link-underline contact-section__email"
-              >
-                {CONTACT_INFO.email}
-              </a>
+        {/* Two-Column Grid: Details Left vs FAQ Right */}
+        <div className="ref-contact__grid">
+          {/* Left Column: Direct Contact Details & Links */}
+          <div className="ref-contact__left">
+            <Reveal className="ref-contact__intro-box">
+              <p className="ref-contact__intro-text">
+                I’m exploring the intersection of computer science fundamentals,
+                low-level systems, and practical software development. Whether you
+                have questions about my coursework, want to discuss systems topics,
+                or are interested in collaborating, let’s build.
+              </p>
+            </Reveal>
+
+            {/* Email Row with Copy Button */}
+            <Reveal delay={120} className="ref-contact__email-card">
+              <div className="ref-contact__email-info">
+                <span className="ref-mono-label">DIRECT INBOX</span>
+                <a
+                  href={`mailto:${CONTACT_INFO.email}?subject=Portfolio%20Inquiry%20-%20Tushar%20Mittal`}
+                  className="ref-contact__email-link display"
+                >
+                  {CONTACT_INFO.email}
+                </a>
+              </div>
               <button
                 type="button"
                 onClick={handleCopyEmail}
+                className="ref-contact__copy-btn"
                 aria-label="Copy email address to clipboard"
-                className="contact-section__copy-btn"
                 title="Copy address"
               >
                 {copied ? (
-                  <Check className="contact-section__copy-icon is-copied" aria-hidden="true" />
+                  <Check className="ref-contact__copy-icon is-copied" aria-hidden="true" />
                 ) : (
-                  <Copy className="contact-section__copy-icon" aria-hidden="true" />
+                  <Copy className="ref-contact__copy-icon" aria-hidden="true" />
                 )}
+                <span>{copied ? 'Copied' : 'Copy'}</span>
               </button>
             </Reveal>
 
-            <p role="status" className="label-mono contact-section__copy-status">
-              {copied
-                ? 'Email copied to clipboard.'
-                : copyError
-                ? 'Copy unavailable — use the email link.'
-                : ''}
-            </p>
+            {/* Social Channels */}
+            <div className="ref-contact__channels">
+              <Reveal delay={180}>
+                <a
+                  href={CONTACT_INFO.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ref-contact__channel-link"
+                >
+                  <span className="ref-mono-label">GITHUB</span>
+                  <span className="ref-contact__channel-val">
+                    github.com/TusharMital
+                    <ArrowUpRight className="ref-contact__arrow" aria-hidden="true" />
+                  </span>
+                </a>
+              </Reveal>
 
-            {/* Social Channels List */}
-            <Reveal delay={100} className="contact-section__links">
+              <Reveal delay={240}>
+                <a
+                  href={CONTACT_INFO.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ref-contact__channel-link"
+                >
+                  <span className="ref-mono-label">LINKEDIN</span>
+                  <span className="ref-contact__channel-val">
+                    in/tushar-mittal
+                    <ArrowUpRight className="ref-contact__arrow" aria-hidden="true" />
+                  </span>
+                </a>
+              </Reveal>
+            </div>
+
+            {/* Send a Message CTA Button */}
+            <Reveal delay={280}>
+              <a
+                href={`mailto:${CONTACT_INFO.email}?subject=Collaboration%20Inquiry`}
+                className="ref-contact__send-btn"
+              >
+                <span>SEND A MESSAGE</span>
+                <ArrowUpRight className="ref-contact__arrow" aria-hidden="true" />
+              </a>
+            </Reveal>
+          </div>
+
+          {/* Right Column: FAQ Accordion matching reference 001-004 */}
+          <div className="ref-contact__right">
+            <span className="ref-mono-label ref-contact__faq-heading">FREQUENTLY ASKED</span>
+            <div className="ref-contact__faq-list">
+              {FAQS.map((faq, idx) => {
+                const isOpen = openFaq === idx
+                return (
+                  <Reveal
+                    key={faq.num}
+                    delay={idx * 60}
+                    className={`ref-contact__faq-item ${isOpen ? 'is-open' : ''}`}
+                  >
+                    <button
+                      type="button"
+                      className="ref-contact__faq-trigger"
+                      onClick={() => toggleFaq(idx)}
+                      aria-expanded={isOpen}
+                    >
+                      <div className="ref-contact__faq-title-wrap">
+                        <span className="ref-contact__faq-num">{faq.num}</span>
+                        <h3 className="ref-contact__faq-question">{faq.question}</h3>
+                      </div>
+                      <ChevronDown className="ref-contact__faq-chevron" aria-hidden="true" />
+                    </button>
+                    {isOpen && (
+                      <div className="ref-contact__faq-answer-wrap">
+                        <p className="ref-contact__faq-answer">{faq.answer}</p>
+                      </div>
+                    )}
+                  </Reveal>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Reference Signature Signoff: WHERE DO I SIGN? HERE */}
+        <Reveal delay={200} className="ref-contact__signoff">
+          <div className="ref-contact__signoff-text display">
+            WHERE DO I SIGN?{' '}
+            <a
+              href={`mailto:${CONTACT_INFO.email}?subject=Hello%20Tushar`}
+              className="ref-contact__signoff-here"
+            >
+              HERE
+            </a>
+          </div>
+        </Reveal>
+
+        {/* Minimalist Reference Footer Bottom */}
+        <footer className="ref-site-footer">
+          <div className="ref-site-footer__inner">
+            <span className="ref-mono-label">
+              &copy; {CURRENT_YEAR} TUSHAR MITTAL · JECRC UNIVERSITY
+            </span>
+            <div className="ref-site-footer__links">
               <a
                 href={CONTACT_INFO.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="contact-section__link-item group"
+                className="ref-site-footer__link"
               >
-                <span className="label-mono contact-section__link-label">GitHub</span>
-                <span className="contact-section__link-val">
-                  github.com/TusharMital
-                  <ArrowUpRight className="contact-section__arrow" aria-hidden="true" />
-                </span>
+                GITHUB
               </a>
-
               <a
                 href={CONTACT_INFO.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="contact-section__link-item group"
+                className="ref-site-footer__link"
               >
-                <span className="label-mono contact-section__link-label">LinkedIn</span>
-                <span className="contact-section__link-val">
-                  in/tushar-mittal
-                  <ArrowUpRight className="contact-section__arrow" aria-hidden="true" />
-                </span>
+                LINKEDIN
               </a>
-            </Reveal>
+              <a
+                href={`mailto:${CONTACT_INFO.email}`}
+                className="ref-site-footer__link"
+              >
+                EMAIL
+              </a>
+            </div>
           </div>
-        </div>
+        </footer>
       </div>
-
-      {/* Lovable Reference Footer */}
-      <footer className="site-footer">
-        <div className="label-mono site-footer__inner">
-          <span>&copy; {CURRENT_YEAR} Tushar Mittal</span>
-          <span className="site-footer__badge">
-            <span className="site-footer__signal-dot" aria-hidden="true" />
-            <span>compiled with curiosity · JECRC University</span>
-          </span>
-          <div className="site-footer__links">
-            <a
-              href={CONTACT_INFO.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="site-footer__link"
-            >
-              GitHub
-            </a>
-            <a
-              href={CONTACT_INFO.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="site-footer__link"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={`mailto:${CONTACT_INFO.email}`}
-              className="site-footer__link"
-            >
-              Email
-            </a>
-          </div>
-        </div>
-      </footer>
     </section>
   )
 }
-
-export default Contact

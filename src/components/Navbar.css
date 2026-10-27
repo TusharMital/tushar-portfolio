@@ -22,25 +22,38 @@
   gap: 1rem;
 }
 
-.site-nav__brand {
-  font-size: 2rem;
+.site-nav__brand-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--foreground);
   text-decoration: none;
-  line-height: 1;
-  display: inline-flex;
-  align-items: baseline;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
-.site-nav__dot {
-  color: var(--primary);
+.site-nav__brand-ref:hover {
+  opacity: 0.8;
+}
+
+.site-nav__brand-name {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.site-nav__brand-year {
+  color: var(--muted-foreground);
+  font-weight: 400;
 }
 
 .site-nav__desktop {
   display: none;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 900px) {
   .site-nav__desktop {
     display: block;
   }
@@ -49,29 +62,54 @@
 .site-nav__links {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 1.5rem;
 }
 
-.site-nav__link {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 0.65rem;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 500;
+.site-nav__email-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   color: var(--muted-foreground);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.site-nav__link:hover {
+.site-nav__email-link:hover {
   color: var(--foreground);
 }
 
-.site-nav__link.is-active {
+.site-nav__ref-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-nav__ref-link:hover {
   color: var(--primary);
-  text-decoration: underline;
-  text-underline-offset: 8px;
+}
+
+.site-nav__contact-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--foreground);
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.2s ease;
+}
+
+.site-nav__contact-pill:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #000000;
 }
 
 .site-nav__actions {

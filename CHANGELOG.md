@@ -2,34 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Stage 7: Portfolio Quality Assurance & Final Polish] - 2026-10-26
+## [Pixel-Perfect Reconstruction: Reference Portfolio Fidelity] - 2026-10-27
 
-### Fixed
-- **Resolved HTML ID Uniqueness Violation**: Removed duplicate `id="top"` on outer `<div className="page">` in `App.tsx`, preserving single source of truth on `<section id="top">` in `Hero.tsx`.
-- **Restored Broken `aria-labelledby` References**:
-  - Updated `Reveal.tsx` component to forward HTML attributes (`id`, `aria-label`, etc.) and merge `style` with polymorphic elements.
-  - Added matching `id` attributes to section headings: `id="about-heading"` (`About.tsx`), `id="skills-heading"` (`Skills.tsx`), `id="projects-heading"` (`Projects.tsx`), `id="workflow-heading"` (`PromptWorkflow.tsx`), `id="journey-heading"` (`LearningJourney.tsx`), `id="assistant-heading"` (`Chatbot.tsx`), and `id="contact-heading"` (`Contact.tsx`).
-- **Fixed Case-Study Navbar Navigation**:
-  - Updated `Navbar.tsx` and `App.tsx` so clicking any section link in the navbar while viewing a case study correctly navigates to the target section (`#about`, `#skills`, `#contact`, etc.) instead of defaulting always to `#projects`.
-  - Brand logo now navigates cleanly back to top (`#top`).
+### Changed
+- **Comprehensive Reference-Driven Reconstruction matching https://portfolio-mti1.vercel.app/**:
+  - Audited reference Framer DOM hierarchy, typography tokens, font declarations (`Geist`, `Inter`, `Suisse Int'l`, `GT Flexa Mono`), and color palette (`#000000`, `#151515`, `#f4f1ee`, `#ff4c24`, `#f44849`).
+  - Added Google Fonts `Geist` and `Geist Mono` alongside `Inter` and `JetBrains Mono` in `index.html`.
+  - Re-architected `src/index.css` with exact reference color variables, display font scaling, pill tags (`.ref-badge`), mono labels (`.ref-mono-label`), and centered responsive container (`.ref-section-container`).
+  - Reconstructed `Navbar`: fixed/sticky translucent header with lowercase brand and year (`tushar— ©2025`), direct email, `GITHUB`, `CONTACT` pill button, theme switcher, and AI assistant modal launcher.
+  - Reconstructed `Hero`: centered composition with pulsing status badge (`Available for opportunities · CS @ JECRC`), headline (`Build at the frontier`), dynamic rotating focus areas (`shipping things that matter.`, `systems, web & AI.`, `even if you aren't one.`), gradient mask ambient graphic, dual pill action buttons (`Explore Work`, `Contact Me`), and metadata footer.
+  - Created `TechMarquee`: continuous, infinitely scrolling technology stack strip with 12 verified engineering technologies/tools, subtle border framing, pause-on-hover, and `prefers-reduced-motion` compliance.
+  - Reconstructed `About` (`[ 01 / 09 ] ABOUT`): asymmetric two-column layout with bold headline, verified JECRC University narrative, quote callout, and dual focus cards (`// SYSTEMS & COMPUTING` and `// AI & WORKFLOWS`).
+  - Reconstructed `Skills` (`[ 02 / 09 ] SKILLS`): `Technical toolkit.` heading, descriptive narrative, `VIEW GITHUB` button, and responsive grid of 12 categorized technical capabilities with hover elevation.
+  - Reconstructed `Journey` (`[ 03 / 09 ] MY JOURNEY`): numbered milestone boxes (`01` through `06`) with date tags, descriptions, and verified MeitY/MNIT Quantum Computing certification callout card.
+  - Reconstructed `Projects` (`[ 04 / 09 ] PROJECTS`): `Selected work.` / `Things I've built.`, interactive search and category filtering (`All`, `Python`, `Web Development`, `Debugging`, `Prompt Engineering`), and bold project cards with repository, demo, and case study links.
+  - Reconstructed `Philosophy` (`[ 06 / 09 ] PHILOSOPHY`): `How I Work` with 4 interactive phases (`Phase 01: Explore`, `Phase 02: Build`, `Phase 03: Ship`, `Phase 04: Iterate`), active tab cards, and core engineering tenets.
+  - Created `Principles` (`[ 07 / 09 ] PRINCIPLES`): giant display header and 17 numbered engineering tenets (`001.` through `017.`) in a responsive 3-column card grid with hover glow.
+  - Created `Curiosity` (`[ 08 / 09 ] THE CURIOSITY`): frosted blur card with ambient glow exploring "How software works beneath the surface" and core stack summary strip.
+  - Reconstructed `Contact` (`[ 09 / 09 ] CONTACT`): `Let's connect.` / `I'm listening.`, direct email card with instant clipboard copy feedback, 4-item interactive FAQ accordion (`001` through `004`), signature signoff (`WHERE DO I SIGN? HERE`), and minimalist footer.
 
-### Added & Improved
-- **Modal & Drawer Keyboard Accessibility (WCAG 2.1)**:
-  - Added `Escape` key event listener to both the mobile navigation drawer (`Navbar.tsx`) and the floating assistant drawer (`Chatbot.tsx`).
-  - Added backdrop overlay click dismissal to the mobile navigation drawer.
-  - Added `aria-modal="true"` to the floating assistant dialog container.
-- **Input Character Constraint Synchronization**:
-  - Synchronized in-page chat input and drawer chat textarea to `maxLength={600}` to prevent silent server truncation or rejection by backend `api/chat.ts`.
-- **Responsive Ergonomics & Touch Target Sizing**:
-  - Increased navbar button touch target dimensions to `min-width: 2.5rem; min-height: 2.5rem;` (40px+) in `Navbar.css`.
-  - Added `overflow-x: hidden;` to `html` and `body` in `index.css` to prevent accidental horizontal scrollbar on narrow mobile devices.
-
-### Verified
-- Automated lint (`oxlint`): 0 warnings, 0 errors across 25 files.
-- TypeScript compiler (`tsc -b`): Clean execution with 0 errors.
-- Production build (`npm run build`): Completed in 5.21s with all assets bundled and minified.
-- Live GroqCloud AI Chatbot endpoint: Verified with real HTTP requests returning 200 OK and grounded answers.
-
+### Preserved
+- All 5 verified portfolio projects and their exact GitHub/live demo URLs.
+- All 9 sections of case study data and direct hash routing (`#/project/:id`).
+- Real-time search, category and technology filtering, and empty state reset.
+- AI assistant (`Chatbot.tsx`) with GroqCloud `/api/chat` integration and strict verification prompt grounding.
+- Theme switching and persistent storage in localStorage.
+- Keyboard accessibility, skip-links, and semantic HTML5 landmarks.
 
 
 ### Changed

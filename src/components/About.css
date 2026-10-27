@@ -1,125 +1,140 @@
-.about-section {
+.ref-about-section {
+  padding: 6rem 0;
   position: relative;
-  border-top: 1px solid var(--hairline);
-  padding: clamp(5rem, 12vh, 9rem) 0;
+  background-color: var(--background);
+  border-top: 1px solid var(--border);
 }
 
-.about-section__container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--page-pad);
+.ref-about__badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
 }
 
-.about-section__header-grid {
+.ref-about__grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 3rem;
-  margin-top: 2.5rem;
+  margin-bottom: 4.5rem;
 }
 
-@media (min-width: 900px) {
-  .about-section__header-grid {
-    grid-template-columns: 8fr 4fr;
-    gap: 4rem;
+@media (min-width: 960px) {
+  .ref-about__grid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 4.5rem;
+    align-items: flex-start;
   }
 }
 
-.about-section__title {
-  font-size: clamp(2.8rem, 5.5vw, 5.25rem);
-  line-height: 1.05;
+.ref-about__left {
+  position: relative;
+}
+
+.ref-about__title {
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   color: var(--foreground);
 }
 
-.about-section__highlight {
-  font-style: italic;
+.ref-about__highlight {
   color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
 }
 
-.about-section__narrative {
+.ref-about__right {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--muted-foreground);
-  padding-top: 0.5rem;
 }
 
-.about-section__p {
-  color: var(--muted-foreground);
-}
-
-.about-section__quote {
-  border-left: 2px solid var(--primary);
-  padding-left: 1.25rem;
-  color: var(--foreground);
+.ref-about__narrative-text {
+  font-family: var(--font-sans);
   font-size: 1.05rem;
   line-height: 1.65;
+  color: var(--muted-foreground);
 }
 
-.about-section__cards-grid {
-  margin-top: clamp(4rem, 8vh, 6rem);
+.ref-about__quote-box {
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--primary);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.ref-about__quote-text {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--foreground);
+}
+
+/* Cards Grid */
+.ref-about__cards-grid {
   display: grid;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: calc(var(--radius) + 4px);
-  overflow: hidden;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .about-section__cards-grid {
+  .ref-about__cards-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.about-section__card {
-  background: var(--background);
-  padding: clamp(2rem, 5vw, 3.5rem);
+.ref-about__card {
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.about-section__card-tag {
+.ref-about__card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.ref-about__card-header {
   margin-bottom: 1rem;
 }
 
-.about-section__card-tag--primary {
-  color: var(--primary);
-}
-
-.about-section__card-tag--signal {
-  color: var(--signal);
-}
-
-.about-section__card-title {
-  font-size: clamp(2rem, 3.2vw, 3rem);
+.ref-about__card-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--foreground);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-.about-section__card-list {
+.ref-about__card-list {
   display: flex;
   flex-direction: column;
+  gap: 0.85rem;
 }
 
-.about-section__card-item {
+.ref-about__card-item {
   display: flex;
-  align-items: baseline;
-  gap: 1.25rem;
-  padding: 1rem 0;
-  border-top: 1px solid var(--hairline);
-  transition: all 0.25s ease;
+  align-items: flex-start;
+  gap: 0.85rem;
 }
 
-.about-section__card-num {
+.ref-about__card-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--primary);
+  padding-top: 0.15rem;
+}
+
+.ref-about__card-label {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.5;
   color: var(--muted-foreground);
-  flex-shrink: 0;
-}
-
-.about-section__card-text {
-  font-size: 1.1rem;
-  color: var(--foreground);
-  transition: transform 0.3s ease;
-}
-
-.about-section__card-item:hover .about-section__card-text {
-  transform: translateX(8px);
 }

@@ -3,12 +3,15 @@ import About from './components/About'
 import CaseStudyView from './components/CaseStudyView'
 import Chatbot from './components/Chatbot'
 import Contact from './components/Contact'
+import Curiosity from './components/Curiosity'
 import Hero from './components/Hero'
 import LearningJourney from './components/LearningJourney'
 import Navbar from './components/Navbar'
+import Philosophy from './components/Philosophy'
+import Principles from './components/Principles'
 import Projects from './components/Projects'
-import PromptWorkflow from './components/PromptWorkflow'
 import Skills from './components/Skills'
+import TechMarquee from './components/TechMarquee'
 import { useHashRoute } from './hooks/useHashRoute'
 import './App.css'
 
@@ -16,16 +19,16 @@ function App() {
   const { route, projectId, navigateTo } = useHashRoute()
   const [chatOpen, setChatOpen] = useState(false)
 
-  const handleNavigateFromCaseStudy = (targetId: string = 'projects') => {
-    navigateTo(`#${targetId}`)
+  const handleReturnToProjects = () => {
+    navigateTo('#projects')
     setTimeout(() => {
-      const section = document.getElementById(targetId)
+      const section = document.getElementById('projects')
       section?.scrollIntoView({ behavior: 'smooth' })
     }, 50)
   }
 
   return (
-    <div className="page">
+    <div className="page" id="top">
       {route === 'case-study' && projectId ? (
         <>
           <a className="skip-link" href="#case-study-heading">
@@ -33,13 +36,13 @@ function App() {
           </a>
           <Navbar
             isCaseStudy={true}
-            onNavigateHome={handleNavigateFromCaseStudy}
+            onNavigateHome={handleReturnToProjects}
             onOpenAssistantModal={() => setChatOpen(true)}
           />
           <main id="main" className="page__main">
             <CaseStudyView
               projectId={projectId}
-              onBack={() => handleNavigateFromCaseStudy('projects')}
+              onBack={handleReturnToProjects}
             />
           </main>
           <Chatbot
@@ -57,17 +60,41 @@ function App() {
             onOpenAssistantModal={() => setChatOpen(true)}
           />
           <main id="main" className="page__main">
+            {/* HERO */}
             <Hero />
+
+            {/* TECHNOLOGY MARQUEE */}
+            <TechMarquee />
+
+            {/* 01 / ABOUT */}
             <About />
+
+            {/* 02 / SKILLS */}
             <Skills />
-            <Projects />
-            <PromptWorkflow />
+
+            {/* 03 / MY JOURNEY */}
             <LearningJourney />
+
+            {/* 04 / PROJECTS */}
+            <Projects />
+
+            {/* 06 / PHILOSOPHY: HOW I WORK */}
+            <Philosophy />
+
+            {/* 07 / PRINCIPLES: 17 NUMBERED RULES */}
+            <Principles />
+
+            {/* 08 / THE CURIOSITY */}
+            <Curiosity />
+
+            {/* 09 / CONTACT & FOOTER */}
+            <Contact />
+
+            {/* AI Assistant Drawer & Modal */}
             <Chatbot
               isOpenFloating={chatOpen}
               onToggleFloating={setChatOpen}
             />
-            <Contact />
           </main>
         </>
       )}

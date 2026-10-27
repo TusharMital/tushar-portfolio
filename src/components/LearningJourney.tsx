@@ -1,134 +1,116 @@
-import { Reveal, SectionLabel } from './Reveal'
+import { Reveal } from './Reveal'
 import './LearningJourney.css'
 
 const MILESTONES = [
   {
     step: '01',
-    title: 'Programming fundamentals',
-    desc: 'Practising C, C++ and Python, with attention to loops, data structures and how programs execute beneath high-level abstractions.',
+    title: 'Joined JECRC University',
+    desc: 'B.Tech in Computer Science begins. Where core computer science theory meets terminals, algorithms, programming exercises, and late-night debugging experiments.',
+    date: '2023 - Present',
   },
   {
     step: '02',
-    title: 'Python debugging & code quality',
-    desc: 'Inspecting errors, checking boundary cases and using tests (unittest, RED → FIX → GREEN cycle) to evaluate corrections before modifying code.',
+    title: 'Programming Fundamentals & C/C++',
+    desc: 'Deep dive into C, C++ and Python, paying close attention to loops, pointers, memory layout, and how programs execute beneath high-level abstractions.',
+    date: 'Foundations',
   },
   {
     step: '03',
-    title: 'DSA Practice',
-    desc: 'Studying core data structures and algorithms, following the Striver A2Z sheet, and practising problem-solving on LeetCode and Codeforces.',
+    title: 'Python Debugging & Code Quality',
+    desc: 'Inspecting errors, checking boundary cases, and using unit tests (unittest, RED → FIX → GREEN workflow) to rigorously evaluate corrections before modifying code.',
+    date: 'Coursework',
   },
   {
     step: '04',
     title: 'Operating Systems & Architecture',
-    desc: 'Studying concurrency, memory management, process synchronization, CPU scheduling, and computer architecture fundamentals.',
+    desc: 'Studying concurrency, memory management, virtual memory, process synchronization, CPU scheduling algorithms, and computer architecture fundamentals.',
+    date: 'Systems',
   },
   {
     step: '05',
-    title: 'Computer Networks',
-    desc: 'Learning network architecture and layered protocols through Kurose & Ross ("A Top-Down Approach") and Stanford CS144 networking course materials.',
+    title: 'Computer Networks & Protocols',
+    desc: 'Learning layered network architecture and protocols through Kurose & Ross ("A Top-Down Approach") and Stanford CS144 networking course materials.',
+    date: 'Networking',
   },
   {
     step: '06',
-    title: 'Quantum Computing',
-    desc: 'Completed the 40-hour MeitY-funded programme “QT-00 & 01 Foundations of Quantum Computing & Applications”, hosted by the Consortium of EICT Academy, MNIT Jaipur — rated “Excellent”.',
-  },
-  {
-    step: '07',
-    title: 'Linux & WSL2',
-    desc: 'Exploring Linux and Ubuntu environments through WSL2 alongside command-line workflows, script automation, and OS concepts.',
-  },
-  {
-    step: '08',
-    title: 'Prompt Engineering & AI-assisted development',
-    desc: 'Clarifying requirements, inspecting generated code diffs line-by-line, validating behaviour with tests, and documenting architectural decisions.',
+    title: 'Foundations of Quantum Computing',
+    desc: 'Completed the 40-hour MeitY-funded programme "QT-00 & 01 Foundations of Quantum Computing & Applications", hosted by the Consortium of EICT Academy, MNIT Jaipur — rated "Excellent".',
+    date: 'Certified',
   },
 ]
 
-const COURSE = {
-  title: 'QT-00 & 01 Foundations of Quantum Computing & Applications',
-  hours: '40 hours',
-  funding: 'MeitY-funded',
-  host: 'Consortium of EICT Academy, MNIT Jaipur',
-  rating: 'Excellent',
-}
-
-function LearningJourney() {
+export default function LearningJourney() {
   return (
-    <section id="journey" className="journey-section" aria-labelledby="journey-heading">
-      <div className="journey-section__container">
-        <div className="journey-section__grid">
-          {/* Left Sticky Column */}
-          <div className="journey-section__sticky-col">
-            <div className="journey-section__sticky-content">
-              <Reveal>
-                <SectionLabel n="05">Learning Journey</SectionLabel>
-              </Reveal>
-              <Reveal as="h2" id="journey-heading" className="display journey-section__title">
-                Building the foundations.
-              </Reveal>
-              <Reveal delay={100} className="journey-section__desc">
-                Programming, systems, networking and emerging technologies —
-                subjects I am actively studying and practising, not claims of
-                instant mastery.
-              </Reveal>
-            </div>
-          </div>
+    <section id="journey" className="ref-journey-section" aria-labelledby="journey-heading">
+      <div className="ref-section-container">
+        {/* Section Header with [ 03 / 09 ] Pill */}
+        <div className="ref-journey__badge-row">
+          <span className="ref-badge">[ 03 / 09 ]</span>
+          <span className="ref-mono-label">MY JOURNEY</span>
+        </div>
 
-          {/* Right Timeline List */}
-          <ol className="journey-section__timeline">
-            {MILESTONES.map((m, idx) => (
-              <Reveal
-                as="li"
-                key={m.title}
-                delay={idx * 60}
-                className="journey-section__item"
-              >
-                <span className="label-mono journey-section__item-num">
-                  {m.step}
-                </span>
-                <div className="journey-section__item-body">
-                  <h3 className="display journey-section__item-title">
-                    {m.title}
-                  </h3>
-                  <p className="journey-section__item-desc">{m.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
+        {/* Section Title & Subtitle */}
+        <div className="ref-journey__header">
+          <Reveal as="h2" id="journey-heading" className="ref-journey__title display">
+            Driven by curiosity, powered by code.
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="ref-journey__subtitle">
+              (Six milestones and counting — building foundations that scale.)
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Numbered Milestone Boxes matching reference boxes */}
+        <div className="ref-journey__boxes">
+          {MILESTONES.map((item, idx) => (
+            <Reveal
+              key={item.step}
+              delay={idx * 60}
+              className="ref-journey__box"
+            >
+              <div className="ref-journey__box-top">
+                <span className="ref-journey__box-num">{item.step}</span>
+                <span className="ref-journey__box-date">{item.date}</span>
+              </div>
+              <div className="ref-journey__box-content">
+                <h3 className="ref-journey__box-title display">{item.title}</h3>
+                <p className="ref-journey__box-desc">{item.desc}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         {/* Education & Certification Detail Card */}
-        <div className="journey-section__cert-card">
-          <p className="label-mono journey-section__cert-kicker">
-            Education &amp; Certification
-          </p>
-          <h3 className="display journey-section__cert-title">
-            {COURSE.title}
+        <Reveal delay={200} className="ref-journey__cert-card">
+          <div className="ref-journey__cert-header">
+            <span className="ref-mono-label">// EDUCATION &amp; CERTIFICATION</span>
+            <span className="ref-journey__cert-badge">RATED EXCELLENT</span>
+          </div>
+          <h3 className="ref-journey__cert-title display">
+            QT-00 &amp; 01 Foundations of Quantum Computing &amp; Applications
           </h3>
-          <dl className="journey-section__cert-grid">
-            <div>
-              <dt className="label-mono journey-section__cert-dt">Duration</dt>
-              <dd className="journey-section__cert-dd">{COURSE.hours}</dd>
+          <div className="ref-journey__cert-grid">
+            <div className="ref-journey__cert-col">
+              <span className="ref-mono-label">Duration</span>
+              <span className="ref-journey__cert-val">40 hours</span>
             </div>
-            <div>
-              <dt className="label-mono journey-section__cert-dt">Funding</dt>
-              <dd className="journey-section__cert-dd">{COURSE.funding}</dd>
+            <div className="ref-journey__cert-col">
+              <span className="ref-mono-label">Funding</span>
+              <span className="ref-journey__cert-val">MeitY-funded</span>
             </div>
-            <div>
-              <dt className="label-mono journey-section__cert-dt">Host</dt>
-              <dd className="journey-section__cert-dd">{COURSE.host}</dd>
+            <div className="ref-journey__cert-col">
+              <span className="ref-mono-label">Host</span>
+              <span className="ref-journey__cert-val">Consortium of EICT Academy, MNIT Jaipur</span>
             </div>
-            <div>
-              <dt className="label-mono journey-section__cert-dt">Reported rating</dt>
-              <dd className="journey-section__cert-dd journey-section__cert-dd--rating">
-                {COURSE.rating}
-              </dd>
+            <div className="ref-journey__cert-col">
+              <span className="ref-mono-label">Grade / Rating</span>
+              <span className="ref-journey__cert-val ref-journey__cert-val--highlight">Excellent</span>
             </div>
-          </dl>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
 }
-
-export default LearningJourney

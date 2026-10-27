@@ -7,10 +7,11 @@ const NAV_ITEMS = [
   { id: 'top', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
+  { id: 'journey', label: 'Journey' },
   { id: 'projects', label: 'Projects' },
-  { id: 'journey', label: 'Learning Journey' },
-  { id: 'workflow', label: 'Prompt Engineering' },
-  { id: 'assistant', label: 'AI Assistant' },
+  { id: 'philosophy', label: 'Philosophy' },
+  { id: 'principles', label: 'Principles' },
+  { id: 'curiosity', label: 'Curiosity' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -103,10 +104,10 @@ function Navbar({
   return (
     <header className="site-nav">
       <div className="site-nav__inner">
-        {/* Brand Logo */}
+        {/* Brand Logo - Reference style: tushar— ©2025 in mono */}
         <a
           href={isCaseStudy ? '#/' : '#top'}
-          className="site-nav__brand display"
+          className="site-nav__brand-ref"
           onClick={(e) => {
             if (isCaseStudy && onNavigateHome) {
               e.preventDefault()
@@ -116,28 +117,41 @@ function Navbar({
           }}
           aria-label="Tushar Mittal Portfolio Home"
         >
-          TM<span className="site-nav__dot">.</span>
+          <span className="site-nav__brand-name">tushar—</span>
+          <span className="site-nav__brand-year">©2025</span>
         </a>
 
         {/* Desktop Navigation Links */}
         <nav className="site-nav__desktop" aria-label="Main">
           <ul className="site-nav__links">
-            {NAV_ITEMS.map((item) => {
-              const isActive = active === item.id && !isCaseStudy
-              const href = isCaseStudy ? `#/${item.id}` : `#${item.id}`
-              return (
-                <li key={item.id}>
-                  <a
-                    href={href}
-                    className={`site-nav__link ${isActive ? 'is-active' : ''}`}
-                    onClick={() => handleLinkClick(item.id)}
-                    aria-current={isActive ? 'location' : undefined}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              )
-            })}
+            <li>
+              <a
+                href="mailto:tushar.mitt6@gmail.com"
+                className="site-nav__email-link"
+                title="Send email"
+              >
+                tushar.mitt6@gmail.com
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/TusharMital"
+                target="_blank"
+                rel="noreferrer"
+                className="site-nav__ref-link"
+              >
+                GITHUB
+              </a>
+            </li>
+            <li>
+              <a
+                href={isCaseStudy ? '#/' : '#contact'}
+                className="site-nav__contact-pill"
+                onClick={() => handleLinkClick('contact')}
+              >
+                CONTACT
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -214,17 +228,21 @@ function Navbar({
               </button>
             </div>
             <ul className="site-nav__mobile-links">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={isCaseStudy ? `#/${item.id}` : `#${item.id}`}
-                    className="site-nav__mobile-link"
-                    onClick={() => handleLinkClick(item.id)}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isActive = active === item.id && !isCaseStudy
+                return (
+                  <li key={item.id}>
+                    <a
+                      href={isCaseStudy ? `#/${item.id}` : `#${item.id}`}
+                      className={`site-nav__mobile-link ${isActive ? 'is-active' : ''}`}
+                      onClick={() => handleLinkClick(item.id)}
+                      aria-current={isActive ? 'location' : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>
